@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+
+
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/css/mdb.min.css" rel="stylesheet">
+
+  <!--Bootstrap-->
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cosmo/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-uhut8PejFZO8994oEgm/ZfAv0mW1/b83nczZzSwElbeILxwkN491YQXsCFTE6+nx" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+
+  <!--FONTAWESOME-->
+  <script src="https://kit.fontawesome.com/45e653109b.js"></script>
+
+  <!--Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+
+</head>
+
+<body style="background: #076585;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #fff, #076585);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #fff, #076585); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
+  <!--NAV login-->
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand brand-font" href="#">FRC</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    </nav>
+  </div>
+
+
+  <div class="container">
+
+    <div class="row pt-5">
+
+
+      <div class="col-12 mb-4 ">
+        <div class="jumbotron">
+          <div class="container">
+            <h1 class="display-4 mb-5">FRC: Funtional y Rehabilitation Center</h1>
+            <div class="row">
+
+              <div class="col-md-6 center-block">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Inicio de sesión</h4>
+                  </div>
+                  <form id="product-form" class="card-body">
+                    <label>Nombre de usuario:</label>
+                    <div class="form-group">
+                      <input type="text" id="name" placeholder="Ingrese su nombre de usuario..." class="form-control">
+                    </div>
+                    <label>Contraseña:</label>
+                    <div class="form-group">
+                      <input type="password" name="" placeholder="Ingrese su contraseña..." class="form-control">
+                    </div>
+                    <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-block" id="btn">
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-5 m-auto">
+                <h5>Inicia sesión para acceder a FRC</h5>
+                <p>Accede a todos nuestros servicios disponibles, foros e información acerca de FRC</p>
+                <img src="img/FRCportada.png" alt="portadaFRC" style="height: 200px">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="jumbotron">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 m-auto">
+                <h3 class="display-4 mb-5">Registro</h3>
+                <h5>¿Aún no te has registrado?</h5>
+                <p>Crea tu cuenta ahora mismmo y únete a la familia FRC</p>
+                <p>Es totalmente gratis, ingresa y mira lo que FRC tiene para tí</p>
+
+                <div class="mb-2">
+                  <img src="img/opcionesIMG/Ready.jpg" alt="..." style="height: 200px; border: 2px solid black">
+                </div>
+
+                <div class="mb-2">
+                  <img src="img/opcionesIMG/Gym2.webp" alt="..." style="height: 202px; border: 2px solid black">
+                </div>
+
+
+
+              </div>
+
+              <div class="col-md-6 center-block">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Ingresa tus datos</h4>
+                  </div>
+
+
+                  <form class="card-body">
+                    <label>Nombre de usuario:</label>
+                    <div class="form-group">
+                      <input type="text" name="" placeholder="Ingrese su nombre de usuario..." class="form-control">
+                    </div>
+
+                    <label>Cédula:</label>
+                    <div class="form-group">
+                      <input type="text" name="" placeholder="Ingrese su número de cédula..." class="form-control">
+                    </div>
+
+                    <label>Nombre:</label>
+                    <div class="form-group">
+                      <input type="text" name="" placeholder="Ingrese su nombre..." class="form-control">
+                    </div>
+
+                    <label>Apellidos:</label>
+                    <div class="form-group">
+                      <input type="text" name="" placeholder="Ingrese sus apellidos..." class="form-control">
+                    </div>
+
+                    <label>Teléfono:</label>
+                    <div class="form-group">
+                      <input type="text" name="" placeholder="Ingrese su número de teléfono..." class="form-control">
+                    </div>
+
+                    <label>Email:</label>
+                    <div class="form-group">
+                      <input type="email" name="" placeholder="Ingrese su email..." class="form-control">
+                    </div>
+
+                    <label>Contraseña:</label>
+                    <div class="form-group">
+                      <input type="password" name="" placeholder="Ingrese su contraseña..." class="form-control">
+                    </div>
+                    <input type="submit" value="Registrar" class="btn btn-primary btn-block" id="btn">
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Footer -->
+  <footer class="page-footer font-small bg-primary mt-5">
+
+    <!-- Footer Links -->
+    <div class="container">
+
+      <!-- Grid row-->
+      <hr class="rgba-white-light" style="margin: 0 15%;">
+
+      <!-- Grid row-->
+      <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+
+        <!-- Grid column -->
+        <div class="col-md-8 col-12 mt-5">
+          <p style="line-height: 1.7rem">Sed ut perspiciatis unde omnis iste natus error sit
+            voluptatem
+            accusantium doloremque laudantium, totam rem
+            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta
+            sunt
+            explicabo.
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+            consequuntur.</p>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+      <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+      <!-- Grid row-->
+      <div class="row pb-3">
+        <!-- Grid column -->
+        <div class="col-md-12">
+          <div class="mb-5 flex-center">
+            <!-- Facebook -->
+            <a href="https://es-la.facebook.com/FunctionalAndRehabilitationCenter/" class="fb-ic">
+              <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+              <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+              <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
+            </a>
+          </div>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+
+</body>
+
+</html>

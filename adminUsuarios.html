@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administración de usuarios</title>
+
+    <!--Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cosmo/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uhut8PejFZO8994oEgm/ZfAv0mW1/b83nczZzSwElbeILxwkN491YQXsCFTE6+nx" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <!--jQuery-->
+    <script type="text/javascript" src="js/plugins/jquery/external/jquery/jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="js/plugins/jquery/jquery-ui.css">
+
+
+    <script type="text/javascript" src="js/scripts/app.js"></script>
+
+</head>
+
+<body>
+
+
+    <!--Navigation-->
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand brand-font" href="#">FRC</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse items-menu" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contáctos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 pt-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="display-5">Usuarios</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="frmUsuarios">
+
+                            <div class="form-group">
+                                <label for="cedula">Cédula:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese la cédula..." id="cedula">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese el nombre..." id="nombre">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="apellidos">Apellidos:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese los apellidos..."
+                                    id="apellidos">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nombreUsuario">Nombre de usuario:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese el nombre de usuario"
+                                    id="nombreUsuario">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese el número telefónico..."
+                                    id="telefono">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" placeholder="Ingrese el email..." id="email">
+                            </div>
+
+                            <div class="from-group mb-3">
+                                <label for="idRol">Rol de usuario:</label>
+                                <select class="form-control form-control-sm" id="idRol">
+                                    <option value="0" >Seleccione un rol...</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Cliente</option>
+                                </select>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" class="form-control" placeholder="" id="contrasena">
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-block text-center">
+                                Guardar
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 pt-3">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Nombre usuario</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
