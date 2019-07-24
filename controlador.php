@@ -4,7 +4,7 @@ if (isset($_POST['accion'])) {
     $accion = $_POST['accion'];
 
     switch ($accion) {
-        case 'add':
+        case 'IngresarUsuario':
             include './Clases/ClaseUsuario.php';
 
             $cedula = $_POST['cedula'];
@@ -18,24 +18,25 @@ if (isset($_POST['accion'])) {
 
             $usu = new ClaseUsuario($cedula, $nombre, $apellidos, $nomuser, $phone, $email, $rol, $contra);
 
-            echo 'Datos enviados: [' . $cedula . " " . $nombre . " " . $apellidos . " " . $nomuser . " " . $phone . " " . $email . " " . $rol . " " . $contra . "]";
-
-            $query = $usu->CrearUsuario();
-
-            echo "Query: " . $query;
-
+            $respuesta = $usu->CrearUsuario();
+            $respuesta = json_encode($respuesta['valido']);
+            echo $respuesta;
 
             break;
 
         case 'listarUsuarios':
             include './Clases/ClaseUsuario.php';
-            $usu = ClaseUsuario->__constructVacio();
+            $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
 
             $respuesta = array();
             $respuesta = $usu->ListarUsuarios();
 
             if ($respuesta['valido']) {
-                echo $respuesta['usuarios'];
+                $datos = $respuesta['usuarios'];
+                $datos = json_encode($datos);
+                echo $datos;
+            } else {
+                echo "shit";
             }
 
             break;

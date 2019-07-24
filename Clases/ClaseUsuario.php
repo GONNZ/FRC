@@ -46,7 +46,15 @@ class ClaseUsuario
         $retorno = array();
         $query = "INSERT INTO tbusuarios(cedula,nombre,apellidos,telefono,email,nombreUsuario,contrasena,idRol) ";
         $query .= "VALUES('" . $this->cedula . "','" . $this->nombre . "','" . $this->apellidos . "','" . $this->telefono . "','" . $this->email . "','" . $this->nomUsuario . "','" . $this->contrasena . "','" . $this->rol . "')";
-        return $query;
+        $resultado = $mysql->query($query);
+        $id = $mysql->insert_id;
+
+        if ($id > 0) {
+            $retorno['valido'] = true;
+        } else {
+            $retorno['valido'] = false;
+        }
+        return $retorno;
     }
     function ListarUsuarios()
     {
@@ -58,7 +66,7 @@ class ClaseUsuario
 
         if ($resultado->num_rows > 0) {
 
-            $json[] = array();
+            $json = array();
             while ($fila = mysqli_fetch_array($resultado)) {
                 $json[] = array(
                     'id' => $fila['id'],
@@ -68,13 +76,13 @@ class ClaseUsuario
                     'telefono' => $fila['telefono'],
                     'email' => $fila['email'],
                     'nombreUsuario' => $fila['nombreUsuario'],
-                    'contrasena' => $fila['contrasena']
+                    'rol' => $fila['idRol']
                 );
             }
 
-            $jsonstring = json_encode($json);
+            //$jsonstring = json_encode($json);
             $retorno["valido"] = true;
-            $retorno["usuarios"] = $jsonstring;
+            $retorno["usuarios"] = $json;
         } else {
             $retorno["valido"] = false;
         }
