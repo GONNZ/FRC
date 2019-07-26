@@ -26,7 +26,7 @@ class ClaseUsuario
         $this->rol = $rol;
         $this->contrasena = $contra;
     }
-    public function __constructVacio()
+    public function ClaseUsuario()
     {
         $this->cedula = '';
         $this->nombre = '';
@@ -85,6 +85,42 @@ class ClaseUsuario
             $retorno["usuarios"] = $json;
         } else {
             $retorno["valido"] = false;
+        }
+        return $retorno;
+    }
+    function EliminaUsuario($id)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "DELETE FROM tbusuarios WHERE id = '" . $id . "'";
+        $resultado = $mysql->query($query);
+
+        if ($mysql->affected_rows > 0) {
+            $retorno['valido'] = true;
+        } else {
+            $retorno['valido'] = false;
+        }
+        return $retorno;
+    }
+    function LlenaFormEdit($id)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT * FROM tbusuarios WHERE id = '" . $id . "'";
+        $resultado = $mysql->query($query);
+        if ($resultado->num_rows > 0) {
+            $fila = mysqli_fetch_array($resultado);
+            $retorno['usuario'] = array(
+                'cedula' => $fila['cedula'],
+                'nombre' => $fila['nombre'],
+                'apellidos' => $fila['apellidos'],
+                'nombreUsuario' => $fila['nombreUsuario'],
+                'telefono' => $fila['telefono'],
+                'email' => $fila['email']
+            );
+            $retorno['valido'] = true;
+        } else {
+            $retorno['valido'] = false;
         }
         return $retorno;
     }

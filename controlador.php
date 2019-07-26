@@ -40,6 +40,39 @@ if (isset($_POST['accion'])) {
             }
 
             break;
+        case 'eliminaUsuario':
+            include './Clases/ClaseUsuario.php';
+            $id = $_POST['id'];
+            $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
+            $respuesta = $usu->EliminaUsuario($id);
+            $respuesta = json_encode($respuesta['valido']);
+            echo $respuesta;
+            break;
+        case 'llenaFormEdit':
+        case 'EditaUsuario':
+
+            if ($accion === 'llenaFormEdit') {
+                include './Clases/ClaseUsuario.php';
+                $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
+                $id = $_POST['id'];
+                $respuesta = array();
+                $respuesta = $usu->LlenaFormEdit($id);
+
+                if ($respuesta['valido']) {
+                    $datos = $respuesta['usuario'];
+                    $datos = json_encode($datos);
+                    echo $datos;
+                } else {
+                    echo "shit";
+                }
+            }else{
+
+                echo "Segunda fase de edit";
+
+
+            }
+
+            break;
 
         default:
             echo 'No se hará nada';
