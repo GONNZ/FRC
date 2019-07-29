@@ -7,14 +7,15 @@ if (isset($_POST['accion'])) {
         case 'IngresarUsuario':
             include './Clases/ClaseUsuario.php';
 
-            $cedula = $_POST['cedula'];
-            $nombre = $_POST['nombre'];
-            $apellidos = $_POST['apellidos'];
-            $nomuser = $_POST['nomUsuario'];
-            $phone = $_POST['telefono'];
-            $email = $_POST['email'];
-            $rol = $_POST['rol'];
-            $contra = $_POST['contrasena'];
+                        
+            $cedula = htmlentities($_POST['cedula']);
+            $nombre = htmlentities($_POST['nombre']);
+            $apellidos = htmlentities($_POST['apellidos']);
+            $nomuser = htmlentities($_POST['nomUsuario']);
+            $phone = htmlentities($_POST['telefono']);
+            $email = htmlentities($_POST['email']);
+            $rol = htmlentities($_POST['rol']);
+            $contra = htmlentities($_POST['contrasena']);
 
             $usu = new ClaseUsuario($cedula, $nombre, $apellidos, $nomuser, $phone, $email, $rol, $contra);
 
@@ -42,7 +43,7 @@ if (isset($_POST['accion'])) {
             break;
         case 'eliminaUsuario':
             include './Clases/ClaseUsuario.php';
-            $id = $_POST['id'];
+            $id = htmlentities($_POST['id']);
             $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
             $respuesta = $usu->EliminaUsuario($id);
             $respuesta = json_encode($respuesta['valido']);
@@ -54,7 +55,7 @@ if (isset($_POST['accion'])) {
             if ($accion === 'llenaFormEdit') {
                 include './Clases/ClaseUsuario.php';
                 $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
-                $id = $_POST['id'];
+                $id = htmlentities($_POST['id']);
                 $respuesta = array();
                 $respuesta = $usu->LlenaFormEdit($id);
 
@@ -70,14 +71,14 @@ if (isset($_POST['accion'])) {
                 include './Clases/ClaseUsuario.php';
                 $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
 
-                $id = $_POST['idEdit'];
-                $cedula = $_POST['cedula'];
-                $nombre = $_POST['nombre'];
-                $apellidos = $_POST['apellidos'];
-                $nomuser = $_POST['nomUsuario'];
-                $phone = $_POST['telefono'];
-                $email = $_POST['email'];
-                $rol = $_POST['rol'];
+                $id = htmlentities($_POST['idEdit']);
+                $cedula = htmlentities($_POST['cedula']);
+                $nombre = htmlentities($_POST['nombre']);
+                $apellidos = htmlentities($_POST['apellidos']);
+                $nomuser = htmlentities($_POST['nomUsuario']);
+                $phone = htmlentities($_POST['telefono']);
+                $email = htmlentities($_POST['email']);
+                $rol = htmlentities($_POST['rol']);
 
                 $respuesta = $usu->EditaUsuarios($id, $cedula, $nombre, $apellidos, $nomuser, $phone, $email, $rol);
                 $respuesta = json_encode($respuesta['valido']);
