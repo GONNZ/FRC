@@ -60,7 +60,7 @@ class ClaseUsuario
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "SELECT * FROM tbusuarios";
+        $query = "SELECT id,cedula,nombre,apellidos,nombreUsuario,email,telefono,idRol FROM tbusuarios ORDER BY id";
 
         $resultado = $mysql->query($query);
 
@@ -68,19 +68,8 @@ class ClaseUsuario
 
             $json = array();
             while ($fila = mysqli_fetch_array($resultado)) {
-                $json[] = array(
-                    'id' => $fila['id'],
-                    'cedula' => $fila['cedula'],
-                    'nombre' => $fila['nombre'],
-                    'apellidos' => $fila['apellidos'],
-                    'telefono' => $fila['telefono'],
-                    'email' => $fila['email'],
-                    'nombreUsuario' => $fila['nombreUsuario'],
-                    'rol' => $fila['idRol']
-                );
+                $json[] = array_map('utf8_encode', $fila);
             }
-
-            //$jsonstring = json_encode($json);
             $retorno["valido"] = true;
             $retorno["usuarios"] = $json;
         } else {
@@ -106,21 +95,28 @@ class ClaseUsuario
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "SELECT * FROM tbusuarios WHERE id = '" . $id . "'";
+        $query = "SELECT id,cedula,nombre,apellidos,nombreUsuario,email,telefono,idRol FROM tbusuarios WHERE id = '" . $id . "'";
         $resultado = $mysql->query($query);
         if ($resultado->num_rows > 0) {
             $fila = mysqli_fetch_array($resultado);
-            $retorno['usuario'] = array(
-                'cedula' => $fila['cedula'],
-                'nombre' => $fila['nombre'],
-                'apellidos' => $fila['apellidos'],
-                'nombreUsuario' => $fila['nombreUsuario'],
-                'telefono' => $fila['telefono'],
-                'email' => $fila['email']
-            );
+            $retorno['usuario'] = array_map('utf8_encode', $fila);
             $retorno['valido'] = true;
         } else {
             $retorno['valido'] = false;
+        }
+        return $retorno;
+    }
+    function EditaUsuarios($id, $ced, $nom, $ape, $nomUs, $telef, $email, $rol)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "UPDATE tbusuarios SET cedula = '" . $ced . "', nombre = '" . $nom . "', apellidos = '" . $ape . "', telefono = '" . $telef . "', email = '" . $email . "', idRol = '" . $rol . "'";
+        $query .= " WHERE id = '" . $id . "'";
+        $resultado = $mysql->query($query);
+        if ($mysql->affected_rows > 0) {
+            $retorno["valido"] = true;
+        } else {
+            $retorno["valido"] = false;
         }
         return $retorno;
     }

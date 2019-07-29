@@ -28,7 +28,7 @@ $(function () {
                         <td>${usuario.nombreUsuario}</td>
                         <td>${usuario.email}</td>
                         <td>${usuario.telefono}</td>
-                        <td>${usuario.rol}</td>
+                        <td>${usuario.idRol}</td>
                         <td>
                             <button class = "btn btn-danger btn-sm elimina-usuario">
                             Eliminar
@@ -57,13 +57,16 @@ $(function () {
 
 
 
-    //Eventos del DOM
+    //--------------Eventos del DOM
+
+    //Registrar Formulario
     $('#frmUsuarios').submit(function (e) {
         e.preventDefault();
 
         let accion = edit === false ? 'IngresarUsuario' : 'EditaUsuario';
 
         let datosUsuario = {
+            idEdit: $('#idEdit').val(),
             cedula: $('#cedula').val(),
             nombre: $('#nombre').val(),
             apellidos: $('#apellidos').val(),
@@ -80,22 +83,35 @@ $(function () {
         $.post("controlador.php", datosUsuario,
             function (response) {
                 console.log(response);
-                /*
+
                 let inserta = JSON.parse(response);
 
-                if (inserta) {
-                    showMessage("Usuario añadido correctamente.", "success");
+                if (accion == 'IngresarUsuario') {
+
+                    if (inserta) {
+                        showMessage("Usuario añadido correctamente.", "success");
+                    } else {
+                        showMessage("Error al añadir usuario", "danger");
+                    }
+
                 } else {
-                    showMessage("Error al añadir usuario", "danger");
+
+                    if (inserta) {
+                        showMessage("Usuario editado correctamente.", "primary");
+                    } else {
+                        showMessage("Error al editar usuario", "danger");
+                    }
+                    edit = false;
                 }
+
                 listarUsuarios();
                 $('#frmUsuarios').trigger('reset');
-                */
+
             });
 
     });
 
-
+    //Eliminar Registro
     $(document).on('click', '.elimina-usuario', function () {
         if (confirm('¿Seguro que desea eliminar este usuario?')) {
             let btnelimina = $(this)[0].parentElement.parentElement;
@@ -122,6 +138,7 @@ $(function () {
         }
     });
 
+    //Editar registro
     $(document).on('click', '.edita-usuario', function () {
 
         let btnelimina = $(this)[0].parentElement.parentElement;
@@ -136,6 +153,7 @@ $(function () {
             data: datos,
             success: function (response) {
                 let usuario = JSON.parse(response);
+                $('#idEdit').val(usuario.id);
                 $('#cedula').val(usuario.cedula);
                 $('#nombre').val(usuario.nombre);
                 $('#apellidos').val(usuario.apellidos);
@@ -143,6 +161,7 @@ $(function () {
                 $('#telefono').val(usuario.telefono);
                 $('#email').val(usuario.email);
                 edit = true;
+                // $('#contrasena').attr('disabled', 'disabled');
             }
         });
 

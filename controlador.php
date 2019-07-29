@@ -65,11 +65,23 @@ if (isset($_POST['accion'])) {
                 } else {
                     echo "shit";
                 }
-            }else{
+            } else {
 
-                echo "Segunda fase de edit";
+                include './Clases/ClaseUsuario.php';
+                $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
 
+                $id = $_POST['idEdit'];
+                $cedula = $_POST['cedula'];
+                $nombre = $_POST['nombre'];
+                $apellidos = $_POST['apellidos'];
+                $nomuser = $_POST['nomUsuario'];
+                $phone = $_POST['telefono'];
+                $email = $_POST['email'];
+                $rol = $_POST['rol'];
 
+                $respuesta = $usu->EditaUsuarios($id, $cedula, $nombre, $apellidos, $nomuser, $phone, $email, $rol);
+                $respuesta = json_encode($respuesta['valido']);
+                echo $respuesta;
             }
 
             break;

@@ -62,42 +62,44 @@
                     <div class="card-body">
                         <form id="frmUsuarios">
 
+                            <input type="hidden" id="idEdit">
+
                             <div class="form-group">
                                 <label for="cedula">Cédula:</label>
-                                <input type="text" class="form-control" placeholder="Cédula..." id="cedula">
+                                <input type="text" class="form-control" placeholder="Cédula..." id="cedula" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" placeholder="Nombre..." id="nombre">
+                                <input type="text" class="form-control" placeholder="Nombre..." id="nombre" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="apellidos">Apellidos:</label>
                                 <input type="text" class="form-control" placeholder="Apellidos..."
-                                    id="apellidos">
+                                    id="apellidos" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="nombreUsuario">Nombre de usuario:</label>
                                 <input type="text" class="form-control" placeholder="Nombre de usuario"
-                                    id="nombreUsuario">
+                                    id="nombreUsuario" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="telefono">Teléfono:</label>
                                 <input type="text" class="form-control" placeholder="Número telefónico..."
-                                    id="telefono">
+                                    id="telefono" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="text" class="form-control" placeholder="Email..." id="email">
+                                <input type="text" class="form-control" placeholder="Email..." id="email" required>
                             </div>
 
                             <div class="from-group mb-3">
                                 <label for="idRol">Rol de usuario:</label>
-                                <select class="form-control form-control-sm" id="idRol">
+                                <select class="form-control form-control-sm" id="idRol" required>
                                     <option value="0" >Seleccione un rol...</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Cliente</option>
@@ -108,7 +110,7 @@
 
                             <div class="form-group">
                                 <label for="contrasena">Contraseña:</label>
-                                <input type="password" class="form-control" placeholder="" id="contrasena">
+                                <input type="password" class="form-control" placeholder="" id="contrasena" required>
                             </div>
 
                             <button type="submit" class="btn btn-success btn-block text-center">
