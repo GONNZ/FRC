@@ -172,7 +172,7 @@ $(function () {
 
     function showMessage(texto, clase) {
         const mensaje = document.createElement('div');
-        mensaje.className = `alert alert-${clase} mt-4`;
+        mensaje.className = `ml-4 alert alert-${clase} mt-4`;
         mensaje.appendChild(document.createTextNode(texto));
         //Showing in Dom
         const contenedor = document.querySelector('.container');
@@ -180,7 +180,7 @@ $(function () {
         contenedor.insertBefore(mensaje, app);
         setTimeout(function () {
             document.querySelector('.alert').remove();
-        }, 2000);
+        }, 3000);
     }
 
     //_________________________________________
