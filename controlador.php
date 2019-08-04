@@ -6,7 +6,6 @@ if (isset($_POST['accion'])) {
     switch ($accion) {
         case 'IngresarUsuario':
             include './Clases/ClaseUsuario.php';
-
                         
             $cedula = htmlentities($_POST['cedula']);
             $nombre = htmlentities($_POST['nombre']);
