@@ -26,3 +26,6 @@
     <script type="text/javascript" src="js/plugins/jquery/jquery-ui.js"></script>
     <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="js/plugins/jquery/jquery-ui.css">
+
+    <!-- Estilos Propios -->
+    <link rel="stylesheet" href="CSS/style.css">
