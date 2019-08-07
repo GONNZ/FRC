@@ -6,7 +6,7 @@ if (isset($_POST['accion'])) {
     switch ($accion) {
         case 'IngresarUsuario':
             include './Clases/ClaseUsuario.php';
-                        
+
             $cedula = htmlentities($_POST['cedula']);
             $nombre = htmlentities($_POST['nombre']);
             $apellidos = htmlentities($_POST['apellidos']);
@@ -83,6 +83,17 @@ if (isset($_POST['accion'])) {
                 $respuesta = json_encode($respuesta['valido']);
                 echo $respuesta;
             }
+
+            break;
+        case 'Login':
+            include './Clases/ClaseUsuario.php';
+
+            $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
+
+            $resultado = $usu->Login($nom, $contra);
+            echo $resultado;
+
+
 
             break;
 

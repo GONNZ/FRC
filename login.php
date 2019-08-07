@@ -35,22 +35,26 @@ include './templates/head.php';
                   <div class="card-header">
                     <h4>Inicio de sesión</h4>
                   </div>
-                  <form id="product-form" class="card-body">
+                  <!-- Form Login -->
+                  <form id="loginForm" class="card-body">
                     <label>Nombre de usuario:</label>
                     <div class="form-group">
-                      <input type="text" id="name" placeholder="Ingrese su nombre de usuario..." class="form-control">
+                      <input type="text" id="nomUsuario" placeholder="Ingrese su nombre de usuario..." class="form-control" required>
                     </div>
                     <label>Contraseña:</label>
                     <div class="form-group">
-                      <input type="password" name="" placeholder="Ingrese su contraseña..." class="form-control">
+                      <input type="password" id="contra" placeholder="Ingrese su contraseña..." class="form-control" required>
                     </div>
-                    <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-block" id="btn">
+                    <button type="submit" id="btnLogin" class="btn btn-primary btn-block">
+                      Iniciar Sesión
+                    </button>
                   </form>
+                  <!--  -->
                 </div>
               </div>
               <div class="col-md-5 m-auto">
                 <h5 class="text-white">Inicia sesión para acceder a FRC</h5>
-                <p class="text-white" >Accede a todos nuestros servicios disponibles, foros e información acerca de FRC</p>
+                <p class="text-white">Accede a todos nuestros servicios disponibles, foros e información acerca de FRC</p>
                 <img src="img/FRCportada.png" alt="portadaFRC" style="height: 200px">
               </div>
             </div>

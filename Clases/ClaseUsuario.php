@@ -110,7 +110,7 @@ class ClaseUsuario
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "UPDATE tbusuarios SET cedula = '" . $ced . "', nombre = '" . $nom . "', apellidos = '" . $ape . "', telefono = '" . $telef . "', email = '" . $email . "', idRol = '" . $rol . "'";
+        $query = "UPDATE tbusuarios SET cedula = '" . $ced . "', nombre = '" . $nom . "', apellidos = '" . $ape . "', telefono = '" . $telef . "', email = '" . $email . "', idRol = '" . $rol . "', nombreUsuario = '" . $nomUs . "'";
         $query .= " WHERE id = '" . $id . "'";
         $resultado = $mysql->query($query);
         if ($mysql->affected_rows > 0) {
@@ -119,5 +119,13 @@ class ClaseUsuario
             $retorno["valido"] = false;
         }
         return $retorno;
+    }
+    function Login($nom,$contra){
+
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT id,cedula,nombre,apellidos,nombreUsuario,email,telefono,idRol FROM tbusuarios WHERE nombreUsuario = '" . $nom . "' AND contrasena = '" . $contra. "'";
+        return $query;
+
     }
 }

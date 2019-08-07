@@ -2,6 +2,7 @@
 include './templates/head.php';
 ?>
 <script type="text/javascript" src="js/scripts/app.js"></script>
+
 <title>Administración de usuarios</title>
 </head>
 

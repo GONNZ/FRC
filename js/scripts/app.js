@@ -82,8 +82,6 @@ $(function () {
 
         $.post("controlador.php", datosUsuario,
             function (response) {
-                console.log(response);
-
                 let inserta = JSON.parse(response);
 
                 if (accion == 'IngresarUsuario') {
