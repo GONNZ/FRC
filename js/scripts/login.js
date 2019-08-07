@@ -1,6 +1,4 @@
 $(function () {
-
-
     $('#loginForm').submit(function (e) {
         e.preventDefault();
         let datosLogin = {
@@ -14,13 +12,15 @@ $(function () {
             url: "controlador.php",
             data: datosLogin,
             dataType: "json",
-            success: function (response) {
-                console.log(response);
+            success: function (Login) {
+                //var Login = JSON.parse(response)
+                if (Login.valido) {
+                    window.location.replace("home.php");
+                } else {
+                    alert('Usuario o contraseña incorrecto.')
+                }
             }
         });
-        
+
     });
-
-
-
 });

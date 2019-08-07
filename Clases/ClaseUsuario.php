@@ -120,12 +120,32 @@ class ClaseUsuario
         }
         return $retorno;
     }
-    function Login($nom,$contra){
-
+    function Login($nom, $contra)
+    {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "SELECT id,cedula,nombre,apellidos,nombreUsuario,email,telefono,idRol FROM tbusuarios WHERE nombreUsuario = '" . $nom . "' AND contrasena = '" . $contra. "'";
-        return $query;
+        $query = "SELECT id,cedula,nombre,apellidos,nombreUsuario,email,telefono,idRol FROM tbusuarios WHERE nombreUsuario = '" . $nom . "' AND contrasena = '" . $contra . "'";
+        $resultado = $mysql->query($query);
 
+        if ($resultado->num_rows > 0) {
+            session_start();
+            $usuario = $resultado->fetch_assoc();
+            $_SESSION['datos-login'] = array(
+                'id' => $usuario['id'],
+                'cedula' => $usuario['cedula'],
+                'nombre' => $usuario['nombre'],
+                'apellidos' => $usuario['apellidos'],
+                'nombreUsuario' => $usuario['nombreUsuario'],
+                'email' => $usuario['email'],
+                'telefono' => $usuario['telefono'],
+                'idRol' => $usuario['idRol']
+            );
+            $retorno['rol'] = $usuario['idRol'];
+            $retorno['valido'] = true;
+        } else {
+            $retorno['valido'] = false;
+        }
+
+        return $retorno;
     }
 }

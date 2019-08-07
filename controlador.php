@@ -87,13 +87,25 @@ if (isset($_POST['accion'])) {
             break;
         case 'Login':
             include './Clases/ClaseUsuario.php';
-
+            //session_start();
+            $nom = $_POST['nombreUsuario'];
+            $contra = $_POST['contra'];
             $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
 
-            $resultado = $usu->Login($nom, $contra);
-            echo $resultado;
+            $respuesta = $usu->Login($nom, $contra);
 
+            //$respuesta['datos']
+            $respuesta = json_encode($respuesta);
+            echo $respuesta;
+            break;
+        case 'Logout':
 
+            session_start();
+            //unset($_SESSION["datos-usuario"]["Nombre"]);        
+            session_destroy();
+
+            $respuesta = true;
+            echo json_encode($respuesta);
 
             break;
 

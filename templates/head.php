@@ -27,5 +27,9 @@
     <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="js/plugins/jquery/jquery-ui.css">
 
+    <!-- Script Globales -->
+
+    <script src="js/scripts/global.js"></script>
+
     <!-- Estilos Propios -->
     <link rel="stylesheet" href="CSS/style.css">
