@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.css" />
+    <link rel="stylesheet" href="../src/messi.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.js"></script>
+    <script src="http://chaijs.com/chai.js"></script>
+    <script>
+      mocha.ui('bdd');
+      mocha.reporter('html');
+      expect = chai.expect;
+    </script>
+    <script src="../src/main.js"></script>
+    <script src="../src/extensions.js"></script>
+    <script src="../test/mainSpec.js"></script>
+    <script src="../test/extensionsSpec.js"></script>
+    <script src="../test/privateFunctionsSpec.js"></script>
+    <script src="../test/todoSpec.js"></script>
+    <script>
+      if (window.mochaPhantomJS) {
+          mochaPhantomJS.run();
+      } else {
+          mocha.run();
+      }
+    </script>
+  </body>
+</html>

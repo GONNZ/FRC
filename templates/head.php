@@ -33,3 +33,8 @@
 
     <!-- Estilos Propios -->
     <link rel="stylesheet" href="CSS/style.css">
+    
+    <!--Plugin messi-->
+    <script src="js/plugins/messijs/dist/messi.js" type="text/javascript"></script>
+    <script src="js/plugins/messijs/dist/messi.min.js" type="text/javascript"></script>
+    <link href="js/plugins/messijs/dist/messi.css" rel="stylesheet" type="text/css" />

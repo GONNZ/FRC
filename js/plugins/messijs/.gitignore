@@ -1,0 +1,13 @@
+node_modules/
+coverage/
+.coveralls.yml
+jquery.js
+jquery.min.js
+#dist/
+
+.bundle/
+.idea/
+Gemfile.lock
+_site/
+bin/
+vendor/
