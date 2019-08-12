@@ -109,6 +109,13 @@ if (isset($_POST['accion'])) {
 
             break;
 
+        case 'rolActual':
+        
+            session_start();
+            $respuesta = $_SESSION['datos-login']['idRol'];
+            echo json_encode($respuesta);
+            break;
+
         default:
             echo 'No se hará nada';
             break;
