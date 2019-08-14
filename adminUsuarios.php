@@ -58,7 +58,7 @@ include './templates/head.php';
                             <div class="from-group mb-3">
                                 <!-- <label for="idRol">Rol de usuario:</label> -->
                                 <select class="form-control form-control-sm" id="idRol" required>
-                                    <option value="0">Seleccione un rol...</option>
+                                    <option value="">Seleccione un rol...</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Cliente</option>
                                 </select>

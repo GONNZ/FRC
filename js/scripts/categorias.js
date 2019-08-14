@@ -1,14 +1,170 @@
 $(function () {
     var edit = false;
+    Listar();
 
-    var dialog = new Messi(
-        'Arttículo creado satisfactoriamente.',
-        {
-            title: 'Artículo Añadido',
-            titleClass: 'anim info',
-            buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+
+    //Función para listar 
+    function Listar() {
+        let listar = {
+            accion: 'listarCategorias'
         }
-    );
 
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: listar,
+            dataType: 'json',
+            success: function (response) {
+                let categorias = response;
+
+                let plantilla = '';
+                categorias.forEach(cate => {
+
+                    plantilla += `
+                    <tr idCate="${cate.idCategoria}">
+                    <td>${cate.idCategoria}</td>
+                    <td>${cate.categoria}</td>
+                    <td>${cate.idTipo}</td>
+                    <td>
+                        <button class = "btn btn-danger btn-sm elimina-categoria margin-auto">
+                        Eliminar
+                        </button>
+                    </td>
+
+                    <td>
+                        <button class = "btn btn-primary btn-sm edita-categoria">
+                        Editar
+                        </button>
+                    </td>
+                
+                </tr>
+                    `
+
+                });
+                $('#ListaArticulos').html(plantilla);
+            }
+        });
+
+    }
+
+    //--------------Eventos del DOM
+    //Registrar Formulario
+    $('#frmCategoria').submit(function (e) {
+        e.preventDefault();
+
+        let accion = edit === false ? 'IngresarCategoria' : 'EditaCategoria';
+
+        let datosCategoria = {
+            nombrecate: $('#nomCat').val(),
+            idtipo: $('select[id=idTipo]').val(),
+            accion: accion
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datosCategoria,
+            dataType: "json",
+            success: function (response) {
+
+
+                if (accion == 'IngresarCategoria') {
+                    //Ingresa
+                    if (response) {
+                        var dialog = new Messi(
+                            'Categoría creada satisfactoriamente.',
+                            {
+                                title: 'Categoría añadida',
+                                titleClass: 'anim info',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
+                    } else {
+                        var dialog = new Messi(
+                            'Error al intentar ingresar la categoría.',
+                            {
+                                title: 'Error',
+                                titleClass: 'anim error',
+                                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                            }
+                        );
+                    }
+                    //Edita
+                } else {
+
+                }
+                Listar();
+                $('#frmCategoria').trigger('reset');
+            }
+        });
+
+    });
+
+    //Eliminar
+    $(document).on('click', '.elimina-categoria', function () {
+
+        let btnelimina = $(this)[0].parentElement.parentElement;
+        var idc = $(btnelimina).attr('idCate');
+
+        var dialog = new Messi(
+            '¿Seguro que desea eliminar la categoría seleccionada?',
+            {
+                title: 'Eliminar',
+                titleClass: 'error',
+                buttons: [
+                    { id: 0, label: 'Yes', val: idc, class: '.caca' },
+                    { id: 1, label: 'No', val: -1 }
+                ],
+                callback: function (id) {
+                    if (id != -1) {
+                        let data = {
+                            idCate: id,
+                            accion: 'eliminacategoria'
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "controlador.php",
+                            data: data,
+                            dataType: "json",
+                            success: function (response) {
+                                setTimeout(function () {
+                                    if (response) {
+                                        var dialog = new Messi(
+                                            'Categoría eliminada satisfactoriamente.',
+                                            {
+                                                title: 'Categoría eliminada',
+                                                titleClass: 'anim info',
+                                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                                            }
+                                        );
+                                    } else {
+                                        var dialog = new Messi(
+                                            'Error al intentar eliminar la categoría.',
+                                            {
+                                                title: 'Error',
+                                                titleClass: 'anim error',
+                                                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                                            }
+                                        );
+                                    }
+                                    Listar();
+                                }, 700)
+
+
+                            }
+                        });
+
+                    }
+                }
+            }
+        );
+
+    });
+
+
+    $(document).on('click', '.caca', function () {
+        console.log('AK14')
+    })
 
 });

@@ -5,7 +5,11 @@
         $rol = $_SESSION["datos-login"]["idRol"];
     } else {
         session_start();
-        $rol = $_SESSION["datos-login"]["idRol"];
+        if (isset($_SESSION['datos-login'])) {
+            $rol = $_SESSION["datos-login"]["idRol"];
+        } else {
+            header("Location:index.php");
+        }
     }
     ?>
 
@@ -30,19 +34,21 @@
                   <?php
                     if ($rol == 1) {
                         ?>
-                      <li id="administrador" class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Administrador
-                          </a>
-                          <input type="hidden" id="rol" value="">
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">Mantenimiento Usuarios</a>
+                  <li id="administrador" class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Administrador
+                      </a>
+                      <input type="hidden" id="rol" value="">
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="adminUsuarios.php">Mantenimiento Usuarios</a>
 
-                              <a class="dropdown-item" href="#">Mantenimiento Servicios</a>
+                          <a class="dropdown-item" href="#">Mantenimiento Servicios</a>
 
-                              <a class="dropdown-item" href="#">Mantenimiento Citas</a>
-                          </div>
-                      </li>
+                          <a class="dropdown-item" href="#">Mantenimiento Citas</a>
+
+                          <a class="dropdown-item" href="adminCategorias.php">Mantenimiento Categorías</a>
+                      </div>
+                  </li>
                   <?php
                     }
                     ?>

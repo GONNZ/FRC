@@ -1,7 +1,7 @@
 $(function () {
     var edit = false;
     listarUsuarios();
-    showMessage("Bienvenido", "success");
+
 
     //Función para listar en tabla
     function listarUsuarios() {
@@ -110,6 +110,7 @@ $(function () {
     });
 
     //Eliminar Registro
+
     $(document).on('click', '.elimina-usuario', function () {
         if (confirm('¿Seguro que desea eliminar este usuario?')) {
             let btnelimina = $(this)[0].parentElement.parentElement;

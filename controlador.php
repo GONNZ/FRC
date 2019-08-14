@@ -1,6 +1,9 @@
 <?php
 
 if (isset($_POST['accion'])) {
+    include './Clases/ClaseCategoria.php';
+    $Categoria = new ClaseCategoria();
+
     $accion = $_POST['accion'];
 
     switch ($accion) {
@@ -87,35 +90,52 @@ if (isset($_POST['accion'])) {
             break;
         case 'Login':
             include './Clases/ClaseUsuario.php';
-            //session_start();
+
             $nom = $_POST['nombreUsuario'];
             $contra = $_POST['contra'];
             $usu = new ClaseUsuario("", "", "", "", "", "", "", "");
-
             $respuesta = $usu->Login($nom, $contra);
 
-            //$respuesta['datos']
             $respuesta = json_encode($respuesta);
             echo $respuesta;
             break;
         case 'Logout':
 
             session_start();
-            //unset($_SESSION["datos-usuario"]["Nombre"]);        
             session_destroy();
 
             $respuesta = true;
             echo json_encode($respuesta);
 
             break;
+        case 'listarCategorias':
+            $respuesta = array();
+            $respuesta = $Categoria->ListarCategorias();
 
-        case 'rolActual':
-        
-            session_start();
-            $respuesta = $_SESSION['datos-login']['idRol'];
-            echo json_encode($respuesta);
+            if ($respuesta['valido']) {
+                $datos = $respuesta['categorias'];
+                $datos = json_encode($datos);
+                echo $datos;
+            } else {
+                echo "shit";
+            }
             break;
 
+        case 'IngresarCategoria':
+
+            $nomcate = $_POST['nombrecate'];
+            $tipo = $_POST['idtipo'];
+            $respuesta = $Categoria->CrearCategoria($nomcate, $tipo);
+            echo json_encode($respuesta);
+
+            break;
+        case 'eliminacategoria':
+
+            $id = $_POST['idCate'];
+            $respuesta = $Categoria->EliminaCategoria($id);
+            echo json_encode($respuesta['valido']);
+
+            break;
         default:
             echo 'No se hará nada';
             break;

@@ -12,7 +12,7 @@ include './templates/head.php';
 
     <div class="container">
         <div id="CategoriasMant" class="row">
-            <div class="col-md-3 pt-3">
+            <div class="col-md-5 pt-3">
                 <div class="card">
                     <div class="card-header text-center">
                         <h3 class="display-5">Categorías</h3>
@@ -27,7 +27,7 @@ include './templates/head.php';
                             </div>
 
                             <div class="from-group mb-3">
-                                <select class="form-control form-control-sm" id="idTipo" required>
+                                <select class="form-control form-control" id="idTipo" required>
                                     <option value="">Seleccione un tipo...</option>
                                     <option value="1">Funcional</option>
                                     <option value="2">Terapia Física</option>
@@ -44,13 +44,15 @@ include './templates/head.php';
                 </div>
             </div>
 
-            <div class="col-md-9 pt-3">
+            <div class="col-md-7 pt-3" style="text-align: center;">
                 <table class="table table-bordered ">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Tipo</th>
+                            <th>Eliminar</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
 

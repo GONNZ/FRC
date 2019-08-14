@@ -21,22 +21,22 @@ class ClaseCategoria
     {
 
         include('C:\wamp64\www\FRC\BD\conexion.php');
-        $retorno = array();
+
         $query = "INSERT INTO tbcategoriasservicios (categoria, idTipo) ";
         $query .= "VALUES('" . $cat . "','" . $tipo . "')";
 
-        /*
-         $resultado = $mysql->query($query);
+
+        $resultado = $mysql->query($query);
+
         $id = $mysql->insert_id;
 
         if ($id > 0) {
-            $retorno['valido'] = true;
+            $retorno = true;
         } else {
-            $retorno['valido'] = false;
+            $retorno = false;
         }
-         */
 
-        return $query;
+        return $retorno;
     }
 
     //Listar
@@ -45,7 +45,7 @@ class ClaseCategoria
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "SELECT * FROM tbcategoriasservicios";
+        $query = "SELECT * FROM tbcategoriasservicios ORDER BY idCategoria";
         $resultado = $mysql->query($query);
 
         if ($resultado->num_rows > 0) {
