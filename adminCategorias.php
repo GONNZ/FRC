@@ -30,7 +30,7 @@ include './templates/head.php';
                                 <select class="form-control form-control" id="idTipo" required>
                                     <option value="">Seleccione un tipo...</option>
                                     <option value="1">Funcional</option>
-                                    <option value="2">Terapia Física</option>
+                                    <option value="2">Rehabilitación Física</option>
                                     <option value="3">Terapia Ocupacional</option>
                                 </select>
                             </div>

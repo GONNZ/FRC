@@ -5,7 +5,7 @@ if (isset($_POST['accion'])) {
     $Categoria = new ClaseCategoria();
 
     $accion = $_POST['accion'];
-
+    /* #region Usuarios*/
     switch ($accion) {
         case 'IngresarUsuario':
             include './Clases/ClaseUsuario.php';
@@ -108,6 +108,10 @@ if (isset($_POST['accion'])) {
             echo json_encode($respuesta);
 
             break;
+
+        /* #endregion */
+        
+    /* #region Categorias*/
         case 'listarCategorias':
             $respuesta = array();
             $respuesta = $Categoria->ListarCategorias();
@@ -136,6 +140,27 @@ if (isset($_POST['accion'])) {
             echo json_encode($respuesta['valido']);
 
             break;
+
+        case 'formEditCategotia':
+        case 'EditaCategoria':
+
+            if ($accion == 'formEditCategotia') {
+                $id = $_POST['id'];
+                $respuesta  = $Categoria->LlenaFormEdit($id);
+
+                if ($respuesta['valido']) {
+                    echo json_encode($respuesta['categoria']);
+                }
+            } else {
+                $nomcate = $_POST['nombrecate'];
+                $tipo = $_POST['idtipo'];
+                $id = $_POST['idCate'];
+
+                $respuesta = $Categoria->EditaUsuarios($nomcate, $tipo, $id);
+                echo json_encode($respuesta);
+            }
+            break;
+        /* #endregion */
         default:
             echo 'No se hará nada';
             break;

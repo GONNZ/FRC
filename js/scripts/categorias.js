@@ -36,7 +36,7 @@ $(function () {
                         Editar
                         </button>
                     </td>
-                
+            
                 </tr>
                     `
 
@@ -56,6 +56,7 @@ $(function () {
 
         let datosCategoria = {
             nombrecate: $('#nomCat').val(),
+            idCate: $('#idEdit').val(),
             idtipo: $('select[id=idTipo]').val(),
             accion: accion
         }
@@ -91,7 +92,25 @@ $(function () {
                     }
                     //Edita
                 } else {
-
+                    if (response) {
+                        var dialog = new Messi(
+                            'Categoría editada satisfactoriamente.',
+                            {
+                                title: 'Categoría editada',
+                                titleClass: 'anim info',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
+                    } else {
+                        var dialog = new Messi(
+                            'Error al intentar editar la categoría.',
+                            {
+                                title: 'Error',
+                                titleClass: 'anim error',
+                                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                            }
+                        );
+                    }
                 }
                 Listar();
                 $('#frmCategoria').trigger('reset');
@@ -128,6 +147,8 @@ $(function () {
                             data: data,
                             dataType: "json",
                             success: function (response) {
+
+                                //Timeout para separar las messi alert
                                 setTimeout(function () {
                                     if (response) {
                                         var dialog = new Messi(
@@ -150,8 +171,6 @@ $(function () {
                                     }
                                     Listar();
                                 }, 700)
-
-
                             }
                         });
 
@@ -162,9 +181,31 @@ $(function () {
 
     });
 
+    //Editar
+    $(document).on('click', '.edita-categoria', function () {
+        let btedita = $(this)[0].parentElement.parentElement;
+        var ide = $(btedita).attr('idCate');
 
-    $(document).on('click', '.caca', function () {
-        console.log('AK14')
-    })
+        datos = {
+            id: ide,
+            accion: 'formEditCategotia'
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datos,
+            dataType: "json",
+            success: function (response) {
+                $('#idEdit').val(response.idCategoria);
+                $('#nomCat').val(response.categoria);
+                $('#idTipo').val(response.idTipo);
+                edit = true;
+            }
+        });
+
+
+    });
+
 
 });
