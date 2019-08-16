@@ -3,43 +3,40 @@ $(function () {
     Listar();
 
 
-    //Función para listar 
+    //Listar
     function Listar() {
         let listar = {
-            accion: 'listarCategorias'
+            accion: 'ListarTipos'
         }
 
         $.ajax({
             type: "POST",
             url: "controlador.php",
             data: listar,
-            dataType: 'json',
+            dataType: "json",
             success: function (response) {
-                let categorias = response;
+                let tipos = response;
 
                 let plantilla = '';
-                categorias.forEach(cate => {
-
+                tipos.forEach(tipo => {
                     plantilla += `
-                    <tr idCate="${cate.idCategoria}">
-                    <td>${cate.idCategoria}</td>
-                    <td>${cate.categoria}</td>
-                    <td>${cate.idTipo}</td>
+                    <tr idTipo="${tipo.idTipo}">
+                    <td>${tipo.idTipo}</td>
+                    <td>${tipo.tipo}</td>
                     <td>
-                        <button class = "btn btn-danger btn-sm elimina-categoria margin-auto">
+                        <button class = "btn btn-danger btn-sm elimina-tipo margin-auto">
                         Eliminar
                         </button>
                     </td>
 
                     <td>
-                        <button class = "btn btn-primary btn-sm edita-categoria">
+                        <button class = "btn btn-primary btn-sm edita-tipo">
                         Editar
                         </button>
                     </td>
-            
+        
                 </tr>
-                    `
-
+                    `;
                 });
                 $('#ListaArticulos').html(plantilla);
             }
@@ -49,40 +46,39 @@ $(function () {
 
     //--------------Eventos del DOM
     //Registrar Formulario
-    $('#frmCategoria').submit(function (e) {
+
+    $('#frmTipos').submit(function (e) {
         e.preventDefault();
 
-        let accion = edit === false ? 'IngresarCategoria' : 'EditaCategoria';
+        let accion = edit === false ? 'IngresarTipo' : 'EditaTipo';
 
-        let datosCategoria = {
-            nombrecate: $('#nomCat').val(),
-            idCate: $('#idEdit').val(),
-            idtipo: $('select[id=idTipo]').val(),
+        let datosTipo = {
+            tipo: $('#nomTipo').val(),
+            id: $('#idEdit').val(),
             accion: accion
         }
 
         $.ajax({
             type: "POST",
             url: "controlador.php",
-            data: datosCategoria,
+            data: datosTipo,
             dataType: "json",
             success: function (response) {
 
-
-                if (accion == 'IngresarCategoria') {
-                    //Ingresa
+                //Ingresar
+                if (accion == 'IngresarTipo') {
                     if (response) {
                         var dialog = new Messi(
-                            'Categoría creada satisfactoriamente.',
+                            'Tipo de servicio creado satisfactoriamente.',
                             {
-                                title: 'Categoría añadida',
+                                title: 'Tipo añadido',
                                 titleClass: 'anim info',
                                 buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
                             }
                         );
                     } else {
                         var dialog = new Messi(
-                            'Error al intentar ingresar la categoría.',
+                            'Error al intentar ingresar el tipo de servicio.',
                             {
                                 title: 'Error',
                                 titleClass: 'anim error',
@@ -90,20 +86,21 @@ $(function () {
                             }
                         );
                     }
-                    //Edita
+
+                    //Editar
                 } else {
                     if (response) {
                         var dialog = new Messi(
-                            'Categoría editada satisfactoriamente.',
+                            'Tipo editado satisfactoriamente.',
                             {
-                                title: 'Categoría editada',
+                                title: 'Tipo de servicio editado',
                                 titleClass: 'anim info',
                                 buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
                             }
                         );
                     } else {
                         var dialog = new Messi(
-                            'Error al intentar editar la categoría.',
+                            'Error al intentar editar el tipo.',
                             {
                                 title: 'Error',
                                 titleClass: 'anim error',
@@ -113,32 +110,33 @@ $(function () {
                     }
                 }
                 Listar();
-                $('#frmCategoria').trigger('reset');
+                $('#frmTipos').trigger('reset');
             }
         });
 
     });
 
     //Eliminar
-    $(document).on('click', '.elimina-categoria', function () {
+
+    $(document).on('click', '.elimina-tipo', function () {
 
         let btnelimina = $(this)[0].parentElement.parentElement;
-        var idc = $(btnelimina).attr('idCate');
+        var idc = $(btnelimina).attr('idTipo');
 
         var dialog = new Messi(
-            '¿Seguro que desea eliminar la categoría seleccionada?',
+            '¿Seguro que desea eliminar el tipo de servicio seleccionado?',
             {
                 title: 'Eliminar',
                 titleClass: 'error',
                 buttons: [
-                    { id: 0, label: 'Yes', val: idc},
+                    { id: 0, label: 'Yes', val: idc },
                     { id: 1, label: 'No', val: -1 }
                 ],
                 callback: function (id) {
                     if (id != -1) {
                         let data = {
-                            idCate: id,
-                            accion: 'eliminacategoria'
+                            id: id,
+                            accion: 'eliminatipo'
                         }
 
                         $.ajax({
@@ -152,16 +150,16 @@ $(function () {
                                 setTimeout(function () {
                                     if (response) {
                                         var dialog = new Messi(
-                                            'Categoría eliminada satisfactoriamente.',
+                                            'Tipo eliminado satisfactoriamente.',
                                             {
-                                                title: 'Categoría eliminada',
+                                                title: 'Tipo de servicio eliminado',
                                                 titleClass: 'anim info',
                                                 buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
                                             }
                                         );
                                     } else {
                                         var dialog = new Messi(
-                                            'Error al intentar eliminar la categoría.',
+                                            'Error al intentar eliminar el tipo de servicio.',
                                             {
                                                 title: 'Error',
                                                 titleClass: 'anim error',
@@ -173,22 +171,20 @@ $(function () {
                                 }, 700)
                             }
                         });
-
                     }
                 }
             }
         );
-
     });
 
     //Editar
-    $(document).on('click', '.edita-categoria', function () {
+    $(document).on('click', '.edita-tipo', function () {
         let btedita = $(this)[0].parentElement.parentElement;
-        var ide = $(btedita).attr('idCate');
+        var ide = $(btedita).attr('idTipo');
 
         datos = {
             id: ide,
-            accion: 'formEditCategotia'
+            accion: 'formEditTipo'
         }
 
         $.ajax({
@@ -197,15 +193,15 @@ $(function () {
             data: datos,
             dataType: "json",
             success: function (response) {
-                $('#idEdit').val(response.idCategoria);
-                $('#nomCat').val(response.categoria);
-                $('#idTipo').val(response.idTipo);
+                $('#idEdit').val(response.idTipo);
+                $('#nomTipo').val(response.tipo);
                 edit = true;
             }
         });
 
 
     });
+
 
 
 });

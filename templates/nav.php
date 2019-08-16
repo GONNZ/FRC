@@ -46,7 +46,10 @@
 
                           <a class="dropdown-item" href="#">Mantenimiento Citas</a>
 
+                          <a class="dropdown-item" href="adminTipos.php">Mantenimiento Tipos de Servicios</a>
+
                           <a class="dropdown-item" href="adminCategorias.php">Mantenimiento Categorías</a>
+                          
                       </div>
                   </li>
                   <?php

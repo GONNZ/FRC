@@ -2,11 +2,14 @@
 
 if (isset($_POST['accion'])) {
     include './Clases/ClaseCategoria.php';
+    include './Clases/ClaseTipos.php';
+    $Tipo = new ClaseTipos();
     $Categoria = new ClaseCategoria();
 
     $accion = $_POST['accion'];
-    /* #region Usuarios*/
+
     switch ($accion) {
+            /* #region Usuarios*/
         case 'IngresarUsuario':
             include './Clases/ClaseUsuario.php';
 
@@ -109,9 +112,9 @@ if (isset($_POST['accion'])) {
 
             break;
 
-        /* #endregion */
-        
-    /* #region Categorias*/
+            /* #endregion */
+
+            /* #region Categorias*/
         case 'listarCategorias':
             $respuesta = array();
             $respuesta = $Categoria->ListarCategorias();
@@ -160,7 +163,63 @@ if (isset($_POST['accion'])) {
                 echo json_encode($respuesta);
             }
             break;
-        /* #endregion */
+            /* #endregion */
+
+            /* #region Tipos */
+        case 'ListarTipos':
+            $respuesta = array();
+            $respuesta = $Tipo->ListarTipos();
+
+            if ($respuesta['valido']) {
+                $datos = $respuesta['tipos'];
+                $datos = json_encode($datos);
+                echo $datos;
+            } else {
+                echo "shit";
+            }
+            break;
+
+        case 'IngresarTipo':
+
+            $tipo = $_POST['tipo'];
+            $respuesta = $Tipo->CrearTipo($tipo);
+            echo json_encode($respuesta);
+
+            break;
+        case 'eliminatipo':
+
+            $id = $_POST['id'];
+            $respuesta = $Tipo->EliminarTipo($id);
+            echo json_encode($respuesta['valido']);
+
+            break;
+
+        case 'formEditTipo':
+        case 'EditaTipo':
+
+            if ($accion == 'formEditTipo') {
+                $id = $_POST['id'];
+                $respuesta  = $Tipo->LlenaFormEdit($id);
+
+                if ($respuesta['valido']) {
+                    echo json_encode($respuesta['tipo']);
+                }
+            } else {
+
+                $tipo = $_POST['tipo'];
+                $id = $_POST['id'];
+
+                $respuesta = $Tipo->EditaTipos($tipo, $id);
+                echo json_encode($respuesta);
+            }
+
+
+            break;
+
+
+            /* #endregion */
+
+
         default:
             echo 'No se hará nada';
             break;

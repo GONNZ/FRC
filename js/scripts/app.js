@@ -87,19 +87,52 @@ $(function () {
                 if (accion == 'IngresarUsuario') {
 
                     if (inserta) {
-                        showMessage("Usuario añadido correctamente.", "success");
+
+                        var dialog = new Messi(
+                            'Usuario ingresado satisfactoriamente.',
+                            {
+                                title: 'Usuario añadido',
+                                titleClass: 'anim info',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
+
                     } else {
-                        showMessage("Error al añadir usuario", "danger");
+                        var dialog = new Messi(
+                            'Error al intentar ingresar el usuario.',
+                            {
+                                title: 'Error',
+                                titleClass: 'anim error',
+                                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                            }
+                        );
                     }
 
                 } else {
 
                     if (inserta) {
-                        showMessage("Usuario editado correctamente.", "primary");
+
+                        var dialog = new Messi(
+                            'Usuario editado correctamente.',
+                            {
+                                title: 'Usuario editado',
+                                titleClass: 'anim info',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
+
                     } else {
-                        showMessage("Error al editar usuario", "danger");
+                        var dialog = new Messi(
+                            'Error al intentar editar el usuario.',
+                            {
+                                title: 'Error',
+                                titleClass: 'anim error',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
                     }
                     edit = false;
+                    $('#contrasena').removeAttr('disabled');
                 }
 
                 listarUsuarios();
@@ -112,29 +145,68 @@ $(function () {
     //Eliminar Registro
 
     $(document).on('click', '.elimina-usuario', function () {
-        if (confirm('¿Seguro que desea eliminar este usuario?')) {
-            let btnelimina = $(this)[0].parentElement.parentElement;
-            let id = $(btnelimina).attr('idUsuario');
-            datos = {
-                id: id,
-                accion: 'eliminaUsuario'
-            }
-            $.ajax({
-                type: "POST",
-                url: "controlador.php",
-                data: datos,
-                success: function (response) {
-                    let elimina = JSON.parse(response);
 
-                    if (elimina) {
-                        showMessage("Usuario eliminado correctamente.", "success");
-                    } else {
-                        showMessage("Error al eliminar usuario", "danger");
+        let btnelimina = $(this)[0].parentElement.parentElement;
+        let id = $(btnelimina).attr('idUsuario');
+
+        var dialog = new Messi(
+            '¿Seguro que desea eliminar la categoría seleccionada?',
+            {
+                title: 'Eliminar',
+                titleClass: 'error',
+                buttons: [
+                    { id: 0, label: 'Yes', val: id, class: '.caca' },
+                    { id: 1, label: 'No', val: -1 }
+                ],
+                callback: function (id) {
+                    if (id != -1) {
+
+
+                        datos = {
+                            id: id,
+                            accion: 'eliminaUsuario'
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "controlador.php",
+                            data: datos,
+                            success: function (response) {
+                                setTimeout(function () {
+                                    let elimina = JSON.parse(response);
+
+                                    if (elimina) {
+                                        var dialog = new Messi(
+                                            'Usuario eliminado satisfactoriamente.',
+                                            {
+                                                title: 'Usuario eliminado',
+                                                titleClass: 'anim info',
+                                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                                            }
+                                        );
+                                    } else {
+                                        var dialog = new Messi(
+                                            'Error al intentar eliminar el usuario.',
+                                            {
+                                                title: 'Error',
+                                                titleClass: 'anim error',
+                                                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                                            }
+                                        );
+                                    }
+                                    listarUsuarios();
+                                }, 700)
+                            }
+                        });
+
                     }
-                    listarUsuarios();
                 }
-            });
-        }
+            }
+        );
+
+
+
+
+
     });
 
     //Editar registro
@@ -159,8 +231,10 @@ $(function () {
                 $('#nombreUsuario').val(usuario.nombreUsuario);
                 $('#telefono').val(usuario.telefono);
                 $('#email').val(usuario.email);
+                $('#idRol').val(usuario.idRol);
+                $('#contrasena').attr('disabled', 'disabled');
                 edit = true;
-                // $('#contrasena').attr('disabled', 'disabled');
+                
             }
         });
 
