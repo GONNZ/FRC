@@ -48,7 +48,7 @@ class ClaseTipos
 
             $json = array();
             while ($fila = mysqli_fetch_array($resultado)) {
-                $json[] = array_map('utf8_encode', $fila);
+                $json[] = $fila; //array_map('utf8_encode', $fila);
             }
             $retorno["valido"] = true;
             $retorno["tipos"] = $json;
@@ -85,7 +85,7 @@ class ClaseTipos
         $resultado = $mysql->query($query);
         if ($resultado->num_rows > 0) {
             $fila = mysqli_fetch_array($resultado);
-            $retorno['tipo'] = array_map('utf8_encode', $fila);
+            $retorno['tipo'] = $fila; //array_map('utf8_encode', $fila);
             $retorno['valido'] = true;
         } else {
             $retorno['valido'] = false;

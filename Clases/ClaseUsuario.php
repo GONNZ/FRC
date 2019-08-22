@@ -45,6 +45,7 @@ class ClaseUsuario
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
 
+        //Insert para registro, con el fin de usuar el mismo método, se envía el rol en vacío y aprovechar este codigo inicialmente hecho para el mantenimiento de usarios 
         if ($this->rol == "") {
             $query = "INSERT INTO tbusuarios(cedula,nombre,apellidos,telefono,email,nombreUsuario,contrasena,idRol) ";
             $query .= "VALUES('" . $this->cedula . "','" . $this->nombre . "','" . $this->apellidos . "','" . $this->telefono . "','" . $this->email . "','" . $this->nomUsuario . "','" . $this->contrasena . "','" . 2 . "')";
@@ -78,7 +79,7 @@ class ClaseUsuario
 
             $json = array();
             while ($fila = mysqli_fetch_array($resultado)) {
-                $json[] = array_map('utf8_encode', $fila);
+                $json[] = $fila; //array_map('utf8_encode', $fila);
             }
             $retorno["valido"] = true;
             $retorno["usuarios"] = $json;
@@ -109,7 +110,7 @@ class ClaseUsuario
         $resultado = $mysql->query($query);
         if ($resultado->num_rows > 0) {
             $fila = mysqli_fetch_array($resultado);
-            $retorno['usuario'] = array_map('utf8_encode', $fila);
+            $retorno['usuario'] = $fila; //array_map('utf8_encode', $fila);
             $retorno['valido'] = true;
         } else {
             $retorno['valido'] = false;

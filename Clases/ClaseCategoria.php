@@ -75,7 +75,7 @@ class ClaseCategoria
 
             $json = array();
             while ($fila = mysqli_fetch_array($resultado)) {
-                $json[] = array_map('utf8_encode', $fila);
+                $json[] = $fila; //array_map('utf8_encode', $fila);
             }
             $retorno["valido"] = true;
             $retorno["categorias"] = $json;

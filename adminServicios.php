@@ -27,6 +27,20 @@ $tipos = $ClaseTipos->ListarTipos();
 
                             <input type="hidden" id="idEdit">
 
+
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nombre de servicio..." id="nomServ" required>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="number" step="0.01" class="form-control" placeholder="Costo por sesión..." id="nomServ" required>
+                            </div>
+
                             <div class="from-group mb-3">
                                 <select class="form-control form-control" id="idTipo" required>
                                     <option value="">Seleccione un tipo...</option>
@@ -40,10 +54,7 @@ $tipos = $ClaseTipos->ListarTipos();
                                 </select>
                             </div>
 
-
-                            <div id="divCate">
-
-                            </div>
+                            <div id="divCate"> </div>
 
                             <button type="submit" class="btn btn-success btn-block text-center">
                                 Guardar
