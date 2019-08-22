@@ -91,6 +91,25 @@ if (isset($_POST['accion'])) {
             }
 
             break;
+
+        case 'Registro';
+            include './Clases/ClaseUsuario.php';
+            $cedula = $_POST['cedula'];
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
+            $nomuser = $_POST['nomUsuario'];
+            $phone = $_POST['telefono'];
+            $email = $_POST['email'];
+            $contra = $_POST['contrasena'];
+
+            $usu = new ClaseUsuario($cedula, $nombre, $apellidos, $nomuser, $phone, $email, "", $contra);
+
+            $respuesta = $usu->CrearUsuario();
+            $respuesta = json_encode($respuesta['valido']);
+            echo $respuesta;
+
+            break;
+
         case 'Login':
             include './Clases/ClaseUsuario.php';
 

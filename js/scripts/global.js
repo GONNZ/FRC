@@ -17,19 +17,4 @@ $(function () {
         });
     });
 
-    function getRol() {
-        let dato = {
-            accion: 'rolActual'
-        }
-        $.ajax({
-            type: "POST",
-            url: "controlador.php",
-            data: dato,
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-            }
-        });
-    }
-
 });

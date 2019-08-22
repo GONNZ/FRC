@@ -94,42 +94,49 @@ include './templates/head.php';
                   </div>
 
 
-                  <form class="card-body">
+
+                  <form id="RegistroForm" class="card-body">
                     <label>Nombre de usuario:</label>
                     <div class="form-group">
-                      <input type="text" name="" placeholder="Ingrese su nombre de usuario..." class="form-control">
+                      <input type="text" class="form-control" placeholder="Nombre de usuario..." id="nombreUsuario" required>
                     </div>
 
                     <label>Cédula:</label>
                     <div class="form-group">
-                      <input type="text" name="" placeholder="Ingrese su número de cédula..." class="form-control">
+                      <input type="text" class="form-control" placeholder="Cédula..." id="cedula" required>
                     </div>
 
                     <label>Nombre:</label>
                     <div class="form-group">
-                      <input type="text" name="" placeholder="Ingrese su nombre..." class="form-control">
+                      <input type="text" class="form-control" placeholder="Nombre..." id="nombre" required>
                     </div>
 
                     <label>Apellidos:</label>
                     <div class="form-group">
-                      <input type="text" name="" placeholder="Ingrese sus apellidos..." class="form-control">
+                      <input type="text" class="form-control" placeholder="Apellidos..." id="apellidos" required>
                     </div>
 
                     <label>Teléfono:</label>
                     <div class="form-group">
-                      <input type="text" name="" placeholder="Ingrese su número de teléfono..." class="form-control">
+                      <input type="text" class="form-control" placeholder="Número telefónico..." id="telefono" required>
                     </div>
 
                     <label>Email:</label>
                     <div class="form-group">
-                      <input type="email" name="" placeholder="Ingrese su email..." class="form-control">
+                      <input type="email" class="form-control" placeholder="Email..." id="email" required>
                     </div>
 
                     <label>Contraseña:</label>
                     <div class="form-group">
-                      <input type="password" name="" placeholder="Ingrese su contraseña..." class="form-control">
+                      <input type="password" id="contraRegistro" placeholder="Ingrese su contraseña..." class="form-control" required>
                     </div>
-                    <input type="submit" value="Registrar" class="btn btn-success btn-block" id="btn">
+
+
+
+                    <button type="submit" class="btn btn-success btn-block" id="btnRegistro">
+                      Registrar
+                    </button>
+
                   </form>
 
 

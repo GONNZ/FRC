@@ -44,8 +44,16 @@ class ClaseUsuario
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "INSERT INTO tbusuarios(cedula,nombre,apellidos,telefono,email,nombreUsuario,contrasena,idRol) ";
-        $query .= "VALUES('" . $this->cedula . "','" . $this->nombre . "','" . $this->apellidos . "','" . $this->telefono . "','" . $this->email . "','" . $this->nomUsuario . "','" . $this->contrasena . "','" . $this->rol . "')";
+
+        if ($this->rol == "") {
+            $query = "INSERT INTO tbusuarios(cedula,nombre,apellidos,telefono,email,nombreUsuario,contrasena,idRol) ";
+            $query .= "VALUES('" . $this->cedula . "','" . $this->nombre . "','" . $this->apellidos . "','" . $this->telefono . "','" . $this->email . "','" . $this->nomUsuario . "','" . $this->contrasena . "','" . 2 . "')";
+        } else {
+            $query = "INSERT INTO tbusuarios(cedula,nombre,apellidos,telefono,email,nombreUsuario,contrasena,idRol) ";
+            $query .= "VALUES('" . $this->cedula . "','" . $this->nombre . "','" . $this->apellidos . "','" . $this->telefono . "','" . $this->email . "','" . $this->nomUsuario . "','" . $this->contrasena . "','" . $this->rol . "')";
+        }
+
+
         $resultado = $mysql->query($query);
         $id = $mysql->insert_id;
 
@@ -56,6 +64,8 @@ class ClaseUsuario
         }
         return $retorno;
     }
+
+
     function ListarUsuarios()
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
