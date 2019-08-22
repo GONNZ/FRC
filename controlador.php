@@ -219,6 +219,16 @@ if (isset($_POST['accion'])) {
 
             /* #endregion */
 
+            /* #region Servicios */
+        case 'comboCategorias':
+
+            $id = $_POST['id'];
+            $respuesta = $Categoria->SelectporTipo($id);
+            $respuesta = $Categoria->ArmaCombo($respuesta);
+            echo json_encode($respuesta);
+
+            break;
+            /* #endregion  */
 
         default:
             echo 'No se hará nada';

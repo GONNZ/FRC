@@ -4,30 +4,28 @@ include './Clases/ClaseTipos.php';
 $ClaseTipos = new ClaseTipos();
 $tipos = $ClaseTipos->ListarTipos();
 ?>
-<script type="text/javascript" src="js/scripts/categorias.js"></script>
-<title>Administración de categorías para Servicios</title>
+<script type="text/javascript" src="js/scripts/servicios.js"></script>
+<title>Mantenimiento de Servicios</title>
 </head>
 
 <body>
+
     <?php
     include './templates/nav.php';
     ?>
 
+
     <div class="container">
-        <div id="CategoriasMant" class="row">
+        <div id="ServiciosMant" class="row">
             <div class="col-md-5 pt-3">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h3 class="display-5">Categorías</h3>
+                        <h3 class="display-5">Servicios</h3>
                     </div>
                     <div class="card-body">
-                        <form id="frmCategoria">
+                        <form id="frmServicios">
 
                             <input type="hidden" id="idEdit">
-
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nombre categoría..." id="nomCat" required>
-                            </div>
 
                             <div class="from-group mb-3">
                                 <select class="form-control form-control" id="idTipo" required>
@@ -40,6 +38,11 @@ $tipos = $ClaseTipos->ListarTipos();
                                     <?php     }
                                     ?>
                                 </select>
+                            </div>
+
+
+                            <div id="divCate">
+
                             </div>
 
                             <button type="submit" class="btn btn-success btn-block text-center">
@@ -70,7 +73,6 @@ $tipos = $ClaseTipos->ListarTipos();
             </div>
         </div>
     </div>
-
 
 
     <?php

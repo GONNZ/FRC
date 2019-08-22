@@ -52,6 +52,29 @@ class ClaseCategoria
 
             $json = array();
             while ($fila = mysqli_fetch_array($resultado)) {
+                $json[] = $fila; /*  array_map('utf8_encode', $fila); */
+            }
+            $retorno["valido"] = true;
+            $retorno["categorias"] = $json;
+        } else {
+            $retorno["valido"] = false;
+        }
+        return $retorno;
+    }
+
+    //Select segun tipo para combo mantenimiento de Servicios
+
+    function SelectporTipo($tipo)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT * FROM tbcategoriasservicios WHERE idTipo = '" . $tipo . "' ORDER BY idCategoria";
+        $resultado = $mysql->query($query);
+
+        if ($resultado->num_rows > 0) {
+
+            $json = array();
+            while ($fila = mysqli_fetch_array($resultado)) {
                 $json[] = array_map('utf8_encode', $fila);
             }
             $retorno["valido"] = true;
@@ -60,6 +83,28 @@ class ClaseCategoria
             $retorno["valido"] = false;
         }
         return $retorno;
+    }
+
+    //Select segun tipo para combo mantenimiento de Servicios
+    function ArmaCombo($cates)
+    {
+        $html = '';
+        if ($cates['valido']) {
+
+            $html = '<div class="from-group mb-3">';
+            $html .= '<select class="form-control form-control" id="idCate" required>';
+            $html .= '<option value="">Seleccione una Categoria...</option>';
+
+            foreach ($cates['categorias'] as $cates) {
+                $html .= ' <option value="' . $cates['idCategoria'] . '">' . $cates['categoria'] . '</option>';
+            }
+
+            $html .= '</select>';
+            $html .= '</div>';
+
+            
+        }
+        return $html;
     }
 
     //Eliminar
@@ -89,7 +134,7 @@ class ClaseCategoria
         $resultado = $mysql->query($query);
         if ($resultado->num_rows > 0) {
             $fila = mysqli_fetch_array($resultado);
-            $retorno['categoria'] = array_map('utf8_encode', $fila);
+            $retorno['categoria'] = $fila; //array_map('utf8_encode', $fila);
             $retorno['valido'] = true;
         } else {
             $retorno['valido'] = false;

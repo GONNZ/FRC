@@ -30,7 +30,7 @@
                   <li class="nav-item">
                       <a class="nav-link" href="#">Acerca de</a>
                   </li>
-                  <!-- Valida rol -->
+
                   <?php
                     if ($rol == 1) {
                         ?>
@@ -40,22 +40,23 @@
                       </a>
                       <input type="hidden" id="rol" value="">
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                           <a class="dropdown-item" href="adminUsuarios.php">Mantenimiento Usuarios</a>
-
-                          <a class="dropdown-item" href="#">Mantenimiento Servicios</a>
-
-                          <a class="dropdown-item" href="#">Mantenimiento Citas</a>
 
                           <a class="dropdown-item" href="adminTipos.php">Mantenimiento Tipos de Servicios</a>
 
                           <a class="dropdown-item" href="adminCategorias.php">Mantenimiento Categorías</a>
-                          
+
+                          <a class="dropdown-item" href="adminServicios.php">Mantenimiento Servicios</a>
+
+                          <a class="dropdown-item" href="#">Mantenimiento Citas</a>
+
                       </div>
                   </li>
                   <?php
                     }
                     ?>
-                  <!-- Valida rol -->
+
                   <li class="nav-item">
                       <a class="nav-link" id="cerrar" href="#">Cerrar Sesión</a>
                   </li>
