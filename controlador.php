@@ -3,6 +3,8 @@
 if (isset($_POST['accion'])) {
     include './Clases/ClaseCategoria.php';
     include './Clases/ClaseTipos.php';
+    include './Clases/ClaseServicio.php';
+    $Servicio = new ClaseServicio();
     $Tipo = new ClaseTipos();
     $Categoria = new ClaseCategoria();
 
@@ -247,6 +249,53 @@ if (isset($_POST['accion'])) {
             echo json_encode($respuesta);
 
             break;
+
+        case 'listarServicios':
+
+            $respuesta = array();
+            $respuesta = $Servicio->ListarServicios();
+
+            if ($respuesta['valido']) {
+                $datos = $respuesta['servicios'];
+                $datos = json_encode($datos);
+                echo $datos;
+            } else {
+                echo "error en consulta o no hay datos";
+            }
+            break;
+
+        case 'IngresarServicio':
+
+            $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
+            $costo = $_POST['costo'];
+            $cate = $_POST['cate'];
+
+            $respuesta = $Servicio->CrearServicio($cate, $nombre, $descripcion, $costo);
+            echo json_encode($respuesta);
+
+            break;
+        case 'eliminaServicio':
+
+            $id = $_POST['idServ'];
+            $respuesta = $Servicio->EliminaServicio($id);
+            echo json_encode($respuesta['valido']);
+
+            break;
+
+        case 'formEditServicio':
+
+            if ($accion == 'formEditServicio') {
+                $id = $_POST['id'];
+                $respuesta  = $Servicio->LLenaFormEdit($id);
+
+                if ($respuesta['valido']) {
+                    echo json_encode($respuesta['servicio']);
+                }
+            } else { }
+
+            break;
+
             /* #endregion  */
 
         default:

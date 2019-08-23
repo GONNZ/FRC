@@ -34,11 +34,11 @@ $tipos = $ClaseTipos->ListarTipos();
                             </div>
 
                             <div class="form-group">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción..."></textarea>
+                                <textarea class="form-control" id="descripcion" rows="3" placeholder="Descripción..." required></textarea>
                             </div>
 
                             <div class="form-group">
-                                <input type="number" step="0.01" class="form-control" placeholder="Costo por sesión..." id="nomServ" required>
+                                <input type="number" step="0.01" class="form-control" placeholder="Costo por sesión..." id="costo" required>
                             </div>
 
                             <div class="from-group mb-3">
@@ -70,8 +70,9 @@ $tipos = $ClaseTipos->ListarTipos();
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
+                            <th>Servicio</th>
+                            <th>Categoría</th>
+                            <th>Costo</th>
                             <th>Eliminar</th>
                             <th>Editar</th>
                         </tr>
