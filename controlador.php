@@ -284,7 +284,7 @@ if (isset($_POST['accion'])) {
             break;
 
         case 'formEditServicio':
-
+        case 'EditaServicio';
             if ($accion == 'formEditServicio') {
                 $id = $_POST['id'];
                 $respuesta  = $Servicio->LLenaFormEdit($id);
@@ -292,8 +292,21 @@ if (isset($_POST['accion'])) {
                 if ($respuesta['valido']) {
                     echo json_encode($respuesta['servicio']);
                 }
-            } else { }
+            } else {
+                $nombre = $_POST['nombre'];
+                $descripcion = $_POST['descripcion'];
+                $costo = $_POST['costo'];
+                $cate = $_POST['cate'];
+                $id = $_POST['id'];
+                $respuesta = $Servicio->EditaServicio($cate, $nombre, $descripcion, $costo, $id);
+                echo json_encode($respuesta);
+            }
 
+            break;
+        case 'getTipo':
+            $id = $_POST['id'];
+            $respuesta  = $Categoria->GetTipo($id);
+            echo json_encode($respuesta['tipo']);
             break;
 
             /* #endregion  */

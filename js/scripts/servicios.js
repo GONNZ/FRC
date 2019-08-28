@@ -6,6 +6,12 @@ $(function () {
     $('#idTipo').change(function (e) {
         e.preventDefault();
         let idTipo = $(this).val();
+        comboDinamico(idTipo);
+
+    });
+    //Funcion para armamr dinamicamente un combo según el tipo seleccionado, se usa en función para
+    //Reutilizarlo en el edit
+    function comboDinamico(idTipo) {
         let data = {
             id: idTipo,
             accion: 'comboCategorias'
@@ -21,8 +27,7 @@ $(function () {
                 $('#divCate').html(response);
             }
         });
-
-    });
+    }
 
     function Listar() {
         let listar = {
@@ -79,6 +84,7 @@ $(function () {
             nombre: $('#nomServ').val(),
             descripcion: $('#descripcion').val(),
             costo: $('#costo').val(),
+            id: $('#idEdit').val(),
             cate: $('select[id=idCate]').val(),
             accion: accion
         }
@@ -113,6 +119,27 @@ $(function () {
                     }
                 } else {
 
+                    if (response) {
+                        var dialog = new Messi(
+                            'Servicio editado satisfactoriamente.',
+                            {
+                                title: 'Servicio editado',
+                                titleClass: 'anim info',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
+                    } else {
+                        var dialog = new Messi(
+                            'Error al intentar editar el servicio.',
+                            {
+                                title: 'Error',
+                                titleClass: 'anim error',
+                                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                            }
+                        );
+                    }
+
+                    var edit = false;
                 }
                 Listar();
                 $('#frmServicios').trigger('reset');
@@ -201,14 +228,34 @@ $(function () {
             data: datos,
             dataType: "json",
             success: function (response) {
-                /*   $(selector).val(value);
-                  $(selector).val(value);
-                  $(selector).val(value);
-                  $(selector).val(value); */
-                console.log(response);
+                $('#idEdit').val(response.idServicio);
+                $('#nomServ').val(response.nombre);
+                $('#descripcion').val(response.descripcion);
+                $('#costo').val(response.costoxsesion);
+                var Categoria = response.idCategoria;
+
+                let getTipo = {
+                    id: Categoria,
+                    accion: 'getTipo'
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "controlador.php",
+                    data: getTipo,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response.idTipo);
+                        $('#idTipo').val(response.idTipo);
+                        comboDinamico(response.idTipo);
+                        console.log(Categoria);
+                        $('#idCate').val(28);
+                    }
+                });
 
             }
         });
 
+        edit = true;
     });
 });

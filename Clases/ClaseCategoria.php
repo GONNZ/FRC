@@ -101,8 +101,6 @@ class ClaseCategoria
 
             $html .= '</select>';
             $html .= '</div>';
-
-            
         }
         return $html;
     }
@@ -152,6 +150,22 @@ class ClaseCategoria
         $resultado = $mysql->query($query);
         if ($mysql->affected_rows > 0) {
             $retorno["valido"] = true;
+        } else {
+            $retorno["valido"] = false;
+        }
+        return $retorno;
+    }
+
+    function GetTipo($id)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT idTipo FROM tbcategoriasservicios WHERE idCategoria ='" . $id . "'";
+        $resultado = $mysql->query($query);
+        if ($resultado->num_rows > 0) {
+            $fila = mysqli_fetch_array($resultado);
+            $retorno["valido"] = true;
+            $retorno["tipo"] = $fila;
         } else {
             $retorno["valido"] = false;
         }

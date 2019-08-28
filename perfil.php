@@ -2,25 +2,32 @@
 include './templates/head.php';
 session_start();
 $nombre = $_SESSION["datos-login"]["nombre"];
+$rol = $_SESSION["datos-login"]["idRol"];
+
 //$rol = $_SESSION["datos-login"]["Rol"];
 ?>
-    <title>Perfil</title>
-    <script src='js/scripts/perfil.js' type="text/javascript"> </script>
+<title>Perfil</title>
+<script src='js/scripts/perfil.js' type="text/javascript"> </script>
 </head>
 
 <body>
 
-<?php
-include './templates/nav.php';
-?>
+    <?php
+    include './templates/nav.php';
+    ?>
 
+
+
+    <?php
+    if ($rol == 1) {
+        ?>
     <div class="container  mt-5">
         <div class="row">
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <img src="img/opcionesIMG/peopletraining.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"> <?php echo $nombre?> </h5>
+                        <h5 class="card-title"> <?php echo $nombre ?> </h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
                     </div>
@@ -60,7 +67,16 @@ include './templates/nav.php';
         </div>
     </div>
 
+    <?php
+    } else {
+        ?>
 
+
+
+
+    <?php
+    }
+    ?>
 
     <?php
     include './templates/footer.php';
