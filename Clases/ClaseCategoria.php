@@ -160,10 +160,16 @@ class ClaseCategoria
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
-        $query = "SELECT idTipo FROM tbcategoriasservicios WHERE idCategoria ='" . $id . "'";
+        $query = "SELECT idTipo, categoria FROM tbcategoriasservicios WHERE idCategoria ='" . $id . "'";
         $resultado = $mysql->query($query);
         if ($resultado->num_rows > 0) {
             $fila = mysqli_fetch_array($resultado);
+
+            $query = "SELECT tipo FROM tbtiposservicios WHERE idTipo ='" . $fila['idTipo'] . "'";
+            $resultado = $mysql->query($query);
+            $tiponom = mysqli_fetch_array($resultado);
+
+            $retorno['nomTipo'] = $tiponom['tipo'];
             $retorno["valido"] = true;
             $retorno["tipo"] = $fila;
         } else {

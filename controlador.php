@@ -306,9 +306,16 @@ if (isset($_POST['accion'])) {
         case 'getTipo':
             $id = $_POST['id'];
             $respuesta  = $Categoria->GetTipo($id);
-            echo json_encode($respuesta['tipo']);
+            echo json_encode($respuesta);
             break;
+        case 'FiltroServicios':
 
+            $id = $_POST['id'];
+
+            $respuesta = $Servicio->ListarServiciosCli($id);
+            echo json_encode($respuesta);
+
+            break;
             /* #endregion  */
 
         default:

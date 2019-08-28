@@ -115,4 +115,29 @@ class ClaseServicio
         }
         return $retorno;
     }
+    //Fin de CRUD
+
+
+    //Función para listar servicios según la categoría seleccionada por el cliente:
+
+    function ListarServiciosCli($cate)
+    {
+
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT * FROM tbservicios WHERE idCategoria = '" . $cate . "' ORDER BY idServicio";
+        $resultado = $mysql->query($query);
+
+        if ($resultado->num_rows > 0) {
+            $json = array();
+            while ($fila = mysqli_fetch_array($resultado)) {
+                $json[] = $fila; /*  array_map('utf8_encode', $fila); */
+            }
+            $retorno["valido"] = true;
+            $retorno["servicios"] = $json;
+        } else {
+            $retorno["valido"] = false;
+        }
+        return $retorno;
+    }
 }
