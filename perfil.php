@@ -77,20 +77,11 @@ $tipos = $ClaseTipos->ListarTipos();
                                             </div>
                                             <div class="modal-body">
                                                 <!-- Contenido Carrito -->
-                                                <div id="ContenidoCarrito">
-
-                                                    <div class="alert alert-success" role="alert">
-                                                        <h4 class="alert-heading">Carrito Vacío</h4>
-                                                        <p>Tu carrito aún se encuentra vacío, te invitamos a var los servicios que <b>FRC</b> tiene a tu disposición, una vez selecciones una cita, esta se verá reflejada aquí ;) </p>
-                                                        <hr>
-                                                        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-                                                    </div>
-
-                                                </div>
+                                                <div id="ContenidoCarrito"> </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" id="confirmaCarrito" class="btn btn-primary">Confirmar Carrito</button>
                                             </div>
                                         </div>
                                     </div>
@@ -147,8 +138,8 @@ $tipos = $ClaseTipos->ListarTipos();
 
                             </div>
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <h3>Seleccion de Servicios</h3>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto ex porro sunt hic dolore similique corrupti enim iste dicta mollitia excepturi nulla aliquid neque adipisci, earum quia facilis tenetur ut.</p>
+                                <h3>Citas</h3>
+                                
 
                             </div>
 

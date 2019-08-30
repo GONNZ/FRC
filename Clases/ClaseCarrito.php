@@ -8,6 +8,7 @@ class ClaseCarrito
     private $idServ;
     private $objServ;
     private $objCate;
+    private $objCitas;
 
     ##Constructor
     public function __construct()
@@ -15,6 +16,7 @@ class ClaseCarrito
         $this->idServ = '';
         $this->objServ = new ClaseServicio();
         $this->objCate = new ClaseCategoria();
+        $this->objCitas = new ClaseCitas();
     }
 
     ##Métodos
@@ -71,9 +73,34 @@ class ClaseCarrito
             $carrito = $_SESSION['carrito'];
         }
 
-       // var_dump($_SESSION['carrito'][0]);
 
         $index = array_search($idCarrito, array_column($carrito, 'idCarrito'));
         unset($_SESSION['carrito'][$index]);
+    }
+
+    function ConfirmaCarrito()
+    {
+        $carrito = array();
+        if (isset($_SESSION['carrito'])) {
+            $carrito = $_SESSION['carrito'];
+        } else {
+            session_start();
+            $carrito = $_SESSION['carrito'];
+        }
+
+        foreach ($carrito as $cita) {
+
+            $idUsu = $cita['cedulaUsu'];
+            $idServ = $cita['idServicio'];
+            $fecha = $cita['fechaCita'];
+            $estado = $cita['estado'];
+
+            $retorno = $this->objCitas->AñadirCita($idUsu, $idServ, $fecha, $estado);
+        }
+
+        unset($_SESSION['carrito']);
+
+
+        return $retorno;
     }
 }

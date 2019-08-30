@@ -5,11 +5,13 @@ if (isset($_POST['accion'])) {
     include './Clases/ClaseTipos.php';
     include './Clases/ClaseServicio.php';
     include './Clases/ClaseCarrito.php';
+    include './Clases/ClaseCita.php';
 
     $Carrito = new ClaseCarrito();
     $Servicio = new ClaseServicio();
     $Tipo = new ClaseTipos();
     $Categoria = new ClaseCategoria();
+    $Citas = new ClaseCitas();
 
     $accion = $_POST['accion'];
 
@@ -332,8 +334,22 @@ if (isset($_POST['accion'])) {
             break;
         case 'getCarrito':
 
-            session_start();
-            $carrito = $_SESSION['carrito'];
+            if (isset($_SESSION)) {
+                if (isset($_SESSION['carrito'])) {
+                    $carrito = $_SESSION['carrito'];
+                } else {
+                    $carrito = '';
+                }
+            } else {
+                session_start();
+                if (isset($_SESSION['carrito'])) {
+                    $carrito = $_SESSION['carrito'];
+                } else {
+                    $carrito = '';
+                }
+            }
+
+
             echo json_encode($carrito);
 
             break;
@@ -343,6 +359,25 @@ if (isset($_POST['accion'])) {
             $id = $_POST['id'];
             $Carrito->BorrarCarrito($id);
             echo json_encode('case');
+
+            break;
+        case 'confirmaCarrito':
+
+            if (isset($_SESSION['carrito'])) {
+                $carrito = $_SESSION['carrito'];
+            } else {
+                session_start();
+                $carrito = $_SESSION['carrito'];
+            }
+            $carrovacio = empty($carrito);
+
+            if ($carrovacio) {
+                echo json_encode(false);
+            } else {
+
+                $respuesta = $Carrito->ConfirmaCarrito();
+                echo json_encode($respuesta);
+            }
 
             break;
             /* #endregion Carrito */

@@ -1,16 +1,16 @@
   <!--Navigation-->
 
-    <?php
-        if (isset($_SESSION)) {
+  <?php
+    if (isset($_SESSION)) {
+        $rol = $_SESSION["datos-login"]["idRol"];
+    } else {
+        session_start();
+        if (isset($_SESSION['datos-login'])) {
             $rol = $_SESSION["datos-login"]["idRol"];
         } else {
-            session_start();
-            if (isset($_SESSION['datos-login'])) {
-                $rol = $_SESSION["datos-login"]["idRol"];
-            } else {
-                header("Location:index.php");
-            }
+            header("Location:index.php");
         }
+    }
     ?>
 
   <div>
@@ -21,9 +21,24 @@
           </button>
           <div class="collapse navbar-collapse items-menu" id="navbarColor01">
               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="perfil.php">Perfil</a>
-                  </li>
+                  <?php
+                    if ($rol == 1) {
+                        ?>
+
+                      <li class="nav-item">
+                          <a class="nav-link" href="perfil.php">Citas</a>
+                      </li>
+                  <?php
+                    } else {
+                        ?>
+                      <li class="nav-item">
+                          <a class="nav-link" href="perfil.php">Servicios</a>
+                      </li>
+
+
+                  <?php
+                    }
+                    ?>
                   <li class="nav-item">
                       <a class="nav-link" href="#">Contáctos</a>
                   </li>

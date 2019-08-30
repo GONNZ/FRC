@@ -200,6 +200,46 @@ $(function () {
     });
 
 
+    //Evento confirma carrito
+    $('#confirmaCarrito').click(function (e) {
+        e.preventDefault();
+
+        let datos = {
+            accion: 'confirmaCarrito'
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datos,
+            dataType: "json",
+            success: function (response) {
+                if (response) {
+                    var dialog = new Messi(
+                        'Citas agendadas satisfactoriamente.',
+                        {
+                            title: 'Bienvenido a la comunidad FRC',
+                            titleClass: 'anim info',
+                            buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                        }
+                    );
+                    ListarCarrito();
+                } else {
+                    var dialog = new Messi(
+                        'Debe agregar algún servicio al carrito antes de realizar esta acción',
+                        {
+                            title: 'Error',
+                            titleClass: 'anim error',
+                            buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                        }
+                    );
+                }
+            }
+        });
+
+    });
+
+
     //Funciones
 
     //Función Listar en Modal - Carrito
@@ -216,34 +256,48 @@ $(function () {
             dataType: "json",
             success: function (response) {
                 let plantilla = '';
-                index = 0;
 
-                response.forEach(cita => {
 
-                    console.log(cita.idCarrito);
-                    plantilla += `
-                    
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            ${cita.tipo} - ${cita.categoria}
-                        </div>
-                        <div class="card-body m-0" indexCarrito="${cita.idCarrito}">
-                            <div class="mt-3">
+                if (response == '') {
 
-                                <div style="width: 40%">
-                                    <h5 class="card-title">${cita.nomServicio}</h5>
-                                    <p class="card-text" style="width: 669px;">${cita.desServicio}</p>
-                                    <label class="card-text" for="fechaCita">Fecha de la sesión: ${cita.fechaCita}</label>
-                                    <small class="form-text text-muted mb-2"><b>Costo por sesión: ₡</b>${cita.costoServicio}</small>
-                                    <button type="button" class="btnCarritoElim btn btn-danger mb-3 mt-3 ml-0" >Eliminar del carrito</button>
-                                </div>
+                    plantilla = `
 
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Carrito Vacío</h4>
+                        <p>Tu carrito aún se encuentra vacío, te invitamos a var los servicios que <b>FRC</b> tiene a tu disposición, una vez selecciones una cita, esta se verá reflejada aquí ;) </p>
+                        <hr>
+                        <p class="mb-0"><strong>FRC: </strong>Functional and Rehabilitation Center</p>
+                     </div>
+
+                    `;
+
+                } else {
+                    response.forEach(cita => {
+
+                        plantilla += `
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                ${cita.tipo} - ${cita.categoria}
                             </div>
-                        </div>
-                    </div>
-                    
-                    `
-                });
+                            <div class="card-body m-0" indexCarrito="${cita.idCarrito}">
+                                <div class="mt-3">
+    
+                                    <div style="width: 40%">
+                                        <h5 class="card-title">${cita.nomServicio}</h5>
+                                        <p class="card-text" style="width: 669px;">${cita.desServicio}</p>
+                                        <label class="card-text" for="fechaCita">Fecha de la sesión: ${cita.fechaCita}</label>
+                                        <small class="form-text text-muted mb-2"><b>Costo por sesión: ₡</b>${cita.costoServicio}</small>
+                                        <button type="button" class="btnCarritoElim btn btn-danger mb-3 mt-3 ml-0" >Eliminar del carrito</button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>                        
+                        `
+                    });
+                }
+
+
 
 
                 $('#ContenidoCarrito').html(plantilla);
