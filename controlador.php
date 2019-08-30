@@ -320,6 +320,14 @@ if (isset($_POST['accion'])) {
             echo json_encode($respuesta);
 
             break;
+
+        case 'getServicio':
+
+            $id = $_POST['id'];
+            $respuesta = $Servicio->BuscarServicio($id);
+            echo json_encode($respuesta['servicio']);
+
+            break;
             /* #endregion  */
 
             /* #region Carrito */
@@ -382,6 +390,30 @@ if (isset($_POST['accion'])) {
             break;
             /* #endregion Carrito */
 
+            /* #region Citas */
+
+        case 'ListarCitasCli':
+
+            if (isset($_SESSION)) {
+                $idUs = $_SESSION['datos-login']['cedula'];
+            } else {
+                session_start();
+                $idUs = $_SESSION['datos-login']['cedula'];
+            }
+
+            $respuesta = $Citas->ListarCitas($idUs);
+
+            echo json_encode($respuesta);
+
+            break;
+        case 'cancelaCita':
+
+            $id = $_POST['id'];
+            $respuesta = $Citas->ActualizaEstadoCita($id, 2);
+            echo json_encode($respuesta);
+
+            break;
+            /* #endregion Citas */
 
 
         default:

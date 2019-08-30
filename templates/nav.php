@@ -39,12 +39,7 @@
                   <?php
                     }
                     ?>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Contáctos</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Acerca de</a>
-                  </li>
+             
 
                   <?php
                     if ($rol == 1) {

@@ -239,6 +239,54 @@ $(function () {
 
     });
 
+    //Evento Cancelar Cita
+
+    $(document).on('click', '.cancela-cita', function () {
+        let elemento = this.parentElement.parentElement;
+        idCita = $(elemento).attr('idCita');
+
+        let datos = {
+            accion: 'cancelaCita',
+            id: idCita
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datos,
+            dataType: "json",
+            success: function (response) {
+                if (response) {
+                    var dialog = new Messi(
+                        'Cita cancelada satisfactoriamente.',
+                        {
+                            title: 'Cita cancelada',
+                            titleClass: 'anim info',
+                            buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                        }
+                    );
+                } else {
+                    var dialog = new Messi(
+                        'Error al intentar cancelar la cita',
+                        {
+                            title: 'Error',
+                            titleClass: 'anim error',
+                            buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                        }
+                    );
+                }
+                ListarCitascli();
+            }
+        });
+
+    });
+    //Evento ver mis citas
+
+    $('.misCitas').click(function (e) {
+        e.preventDefault();
+
+        ListarCitascli();
+    });
 
     //Funciones
 
@@ -303,6 +351,90 @@ $(function () {
                 $('#ContenidoCarrito').html(plantilla);
             }
         });
+    }
+
+
+    //Listar Citas Usuario
+
+    function ListarCitascli() {
+        let datos = {
+            accion: 'ListarCitasCli'
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datos,
+            dataType: "json",
+            success: function (response) {
+
+                let plantilla = '';
+
+                if (response.valido) {
+
+                    var citas = response.citas;
+
+                    citas.forEach(c => {
+                        idServ = c.idServicio;
+
+                        let datos = {
+                            accion: 'getServicio',
+                            id: idServ
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "controlador.php",
+                            data: datos,
+                            dataType: "json",
+                            success: function (servicio) {
+                                plantilla += `
+                                
+                                
+                                <tr idCita = "${c.idCita}">
+
+                                <td>${c.idCita}</td>
+                                <td>${servicio.nombre}</td>
+                                <td>₡ ${servicio.costoxsesion}</td>
+                                <td>${c.fechaCita}</td>
+
+                                <td>
+                                    <button class = "btn btn-danger btn-sm cancela-cita margin-auto">
+                                    Cancelar
+                                    </button>
+                                </td>
+
+                                
+
+                                </tr>   
+                                
+                                
+                                `;
+                                $('#ListaArticulos').html(plantilla);
+
+                            }
+                        });
+
+                    });
+
+
+
+
+                } else {
+                    plantilla = `
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Aún no posees citas agendadas</h4>
+                        <p>Accede a las pestaña servicios para ver todo lo que FRC tiene para tí.</p>
+                    </div>
+                    `;
+
+                    $('#CitasCli').html(plantilla);
+                }
+
+
+            }
+        });
+
     }
 
 });

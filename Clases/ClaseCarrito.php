@@ -94,7 +94,6 @@ class ClaseCarrito
             $idServ = $cita['idServicio'];
             $fecha = $cita['fechaCita'];
             $estado = $cita['estado'];
-
             $retorno = $this->objCitas->AñadirCita($idUsu, $idServ, $fecha, $estado);
         }
 

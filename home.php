@@ -127,7 +127,7 @@ include './templates/head.php';
                             <h5 class="card-title m-3">Entrenamiento Funcional</h5>
                             <p class="card-text ml-3">Basta de excusas, unete a FRC</p>
 
-                            <a href="#" class="btn btn-outline-primary btn-lg ml-3">Ver Membresías</a>
+                            <a href="perfil.php" class="btn btn-outline-primary btn-lg ml-3">Ver Servicios</a>
                         </div>
                     </div>
                     <!--Fin de Ejercicio Funcional sección-->
@@ -260,8 +260,8 @@ include './templates/head.php';
                                     <div style="text-align: end; color:rgb(34, 3, 3)">
                                         <h5 class="card-title m-3 mr-3 ">Terapia Física</h5>
                                         <p class="card-text mr-2">FRC los mejores para tu recuperación</p>
-                                        <a href="#" class="btn btn-outline-primary btn-lg   posicion">Ver
-                                            Membresías</a>
+                                        <a href="perfil.php" class="btn btn-outline-primary btn-lg   posicion">Ver
+                                            Servicios</a>
                                     </div>
 
                                 </div>
@@ -291,8 +291,8 @@ include './templates/head.php';
                                         <div style="color:white; position: relative; top: 360px;">
                                             <h5 class="card-title; ml-2">Terapia Ocupacional</h5>
                                             <p class="card-text ml-2"> <b>FRC</b> buscando la salud integral.</p>
-                                            <a href="#" class="btn btn-outline-primary btn-lg posicion">Ver
-                                                Membresías</a>
+                                            <a href="perfil.php" class="btn btn-outline-primary btn-lg posicion">Ver
+                                                Servicios</a>
                                         </div>
 
                                     </div>

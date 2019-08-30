@@ -42,4 +42,66 @@ class ClaseCitas
 
         return $retorno;
     }
+
+    #aplica para el listar en clientes y en administración
+    function ListarCitas($id)
+    {
+        $retorno = array();
+        if ($id == '') {
+
+            include('C:\wamp64\www\FRC\BD\conexion.php');
+            $query = "SELECT * FROM tbcitas ORDER BY idCita";
+
+            $resultado = $mysql->query($query);
+
+            if ($resultado->num_rows > 0) {
+
+                $json = array();
+                while ($fila = mysqli_fetch_array($resultado)) {
+                    $json[] = $fila;
+                }
+                $retorno["valido"] = true;
+                $retorno["citas"] = $json;
+            } else {
+                $retorno["valido"] = false;
+            }
+        } else {
+
+            include('C:\wamp64\www\FRC\BD\conexion.php');
+            $retorno = array();
+            $query = "SELECT * FROM tbcitas WHERE idUsuario = '" . $id . "' AND idEstado = '1'";
+
+            $resultado = $mysql->query($query);
+            if ($resultado->num_rows > 0) {
+
+                $json = array();
+                while ($fila = mysqli_fetch_array($resultado)) {
+                    $json[] = $fila;
+                }
+                $retorno["valido"] = true;
+                $retorno["citas"] = $json;
+            } else {
+                $retorno["valido"] = false;
+            }
+        }
+
+        return $retorno;
+    }
+
+    #Cancelar Cita
+
+    function ActualizaEstadoCita($id, $estado)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "UPDATE tbcitas SET idEstado = '" . $estado . "' WHERE idCita = '" . $id . "'";
+
+        $resultado = $mysql->query($query);
+        if ($mysql->affected_rows > 0) {
+            $retorno = true;
+        } else {
+            $retorno = false;
+        }
+        return $retorno;
+    }
 }

@@ -55,7 +55,7 @@ $tipos = $ClaseTipos->ListarTipos();
                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Servicios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Mis citas</a>
+                                <a class="nav-link misCitas" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Mis citas</a>
                             </li>
 
                             <li class="nav-item" style="position: relative;left: 436px;">
@@ -138,9 +138,25 @@ $tipos = $ClaseTipos->ListarTipos();
 
                             </div>
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <h3>Citas</h3>
-                                
+                                <div id="CitasCli">
+                                    <h3>Citas</h3>
+                                    <table class="table table-bordered text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Cita</th>
+                                                <th>Servicio</th>
+                                                <th>Costo</th>
+                                                <th>Fecha</th>
+                                                <th>Cancelar</th>
+                                            </tr>
+                                        </thead>
 
+                                        <tbody id="ListaArticulos">
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
                             </div>
 
                         </div>
