@@ -44,6 +44,25 @@ class ClaseServicio
     }
 
 
+    function BuscarServicio($id)
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT * FROM tbservicios WHERE idServicio = '" . $id . "'";
+
+        $resultado = $mysql->query($query);
+
+        if ($resultado->num_rows > 0) {
+            $servicio = mysqli_fetch_array($resultado);
+            $retorno["valido"] = true;
+            $retorno["servicio"] = $servicio;
+        } else {
+            $retorno["valido"] = false;
+        }
+
+        return $retorno;
+    }
+
     function ListarServicios()
     {
         include('C:\wamp64\www\FRC\BD\conexion.php');
@@ -122,7 +141,6 @@ class ClaseServicio
 
     function ListarServiciosCli($cate)
     {
-
         include('C:\wamp64\www\FRC\BD\conexion.php');
         $retorno = array();
         $query = "SELECT * FROM tbservicios WHERE idCategoria = '" . $cate . "' ORDER BY idServicio";

@@ -61,7 +61,7 @@ $(function () {
                         data: getTipo,
                         dataType: "json",
                         success: function (tipo) {
-                            console.log(servicios);
+
 
 
                             servicios.forEach(serv => {
@@ -70,12 +70,20 @@ $(function () {
                                     <div class="card-header">
                                         ${tipo.nomTipo} - ${tipo.tipo.categoria}
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">${serv.nombre}</h5>
-                                        <p class="card-text">${serv.descripcion}</p>
-                                        <small class="form-text text-muted"><b>Costo por sesión: </b>${serv.costoxsesion}</small>
-                                        <a href="#" class="btn btn-success mb-3 mt-3">Agregar a carrito</a>
-                                    </div>
+                                    <div class="card-body" idServicio = "${serv.idServicio}">
+                                        <div class="mt-3">
+                                            <form id="formCita">
+                                                <div class="form-group" style="width: 40%">
+                                                    <h5 class="card-title">${serv.nombre}</h5>
+                                                    <p class="card-text" style="width: 669px;">${serv.descripcion}</p>
+                                                    <small class="form-text text-muted mb-2"><b>Costo por sesión: ₡</b>${serv.costoxsesion}</small>
+                                                    <label class="card-text" for="fechaCita">Indique la fecha de la sesión</label>
+                                                    <input type="date" class="form-control form-control-sm" id="${serv.idServicio}" required>
+                                                    <button  type="submit" class="btnCarrito btn btn-success mb-3 mt-3 ml-0">Agregar a carrito</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                  </div>
                                 </div>
                                 `;
                             });
@@ -99,5 +107,148 @@ $(function () {
         });
 
     });
+
+
+    //Añadir a Carrito
+    $(document).on('click', '.btnCarrito', function (e) {
+
+        e.preventDefault();
+        let btn = this.parentElement.parentElement.parentElement.parentElement;
+        idServ = $(btn).attr('idservicio');
+        var idinputFecha = '#' + idServ;
+        var fechaCita = $(idinputFecha).val();
+
+        if (fechaCita == '') {
+            var dialog = new Messi(
+                'Seleccione una fecha para agregar la cita al carrito',
+                {
+                    title: 'Error',
+                    titleClass: 'anim error',
+                    buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                }
+            );
+        } else {
+            let datos = {
+                id: idServ,
+                fecha: fechaCita,
+                accion: 'añadirCarrito'
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "controlador.php",
+                data: datos,
+                dataType: "json",
+                success: function (response) {
+                    if (response) {
+
+                        var dialog = new Messi(
+                            'Servicio añadido satisfactoriamente al carrito.',
+                            {
+                                title: 'Servicio añadido',
+                                titleClass: 'anim success',
+                                buttons: [{ id: 0, label: 'Aceptar', val: 'X' }]
+                            }
+                        );
+
+                    } else {
+
+                        var dialog = new Messi(
+                            'Error al intentar agregar lo seleccionado al carrito de compras',
+                            {
+                                title: 'Error',
+                                titleClass: 'anim error',
+                                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                            }
+                        );
+
+                    }
+                }
+            });
+        }
+
+
+
+    });
+
+
+    $('#btnCarrito').click(function (e) {
+        e.preventDefault();
+        ListarCarrito();
+    });
+
+
+    $(document).on('click', '.btnCarritoElim', function () {
+        elemento = this.parentElement.parentElement.parentElement;
+        idCarrito = $(elemento).attr('indexcarrito');
+
+        let datos = {
+            accion: 'borradeCarrito',
+            id: idCarrito
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datos,
+            dataType: "json",
+            success: function (response) {
+                ListarCarrito();
+            }
+        });
+
+    });
+
+
+    //Funciones
+
+    //Función Listar en Modal - Carrito
+
+    function ListarCarrito() {
+        datos = {
+            accion: 'getCarrito'
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "controlador.php",
+            data: datos,
+            dataType: "json",
+            success: function (response) {
+                let plantilla = '';
+                index = 0;
+
+                response.forEach(cita => {
+
+                    console.log(cita.idCarrito);
+                    plantilla += `
+                    
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            ${cita.tipo} - ${cita.categoria}
+                        </div>
+                        <div class="card-body m-0" indexCarrito="${cita.idCarrito}">
+                            <div class="mt-3">
+
+                                <div style="width: 40%">
+                                    <h5 class="card-title">${cita.nomServicio}</h5>
+                                    <p class="card-text" style="width: 669px;">${cita.desServicio}</p>
+                                    <label class="card-text" for="fechaCita">Fecha de la sesión: ${cita.fechaCita}</label>
+                                    <small class="form-text text-muted mb-2"><b>Costo por sesión: ₡</b>${cita.costoServicio}</small>
+                                    <button type="button" class="btnCarritoElim btn btn-danger mb-3 mt-3 ml-0" >Eliminar del carrito</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    `
+                });
+
+
+                $('#ContenidoCarrito').html(plantilla);
+            }
+        });
+    }
 
 });

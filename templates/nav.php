@@ -1,16 +1,16 @@
   <!--Navigation-->
 
-  <?php
-    if (isset($_SESSION)) {
-        $rol = $_SESSION["datos-login"]["idRol"];
-    } else {
-        session_start();
-        if (isset($_SESSION['datos-login'])) {
+    <?php
+        if (isset($_SESSION)) {
             $rol = $_SESSION["datos-login"]["idRol"];
         } else {
-            header("Location:index.php");
+            session_start();
+            if (isset($_SESSION['datos-login'])) {
+                $rol = $_SESSION["datos-login"]["idRol"];
+            } else {
+                header("Location:index.php");
+            }
         }
-    }
     ?>
 
   <div>
@@ -34,25 +34,23 @@
                   <?php
                     if ($rol == 1) {
                         ?>
-                  <li id="administrador" class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Administrador
-                      </a>
-                      <input type="hidden" id="rol" value="">
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li id="administrador" class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Administrador
+                          </a>
+                          <input type="hidden" id="rol" value="">
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                          <a class="dropdown-item" href="adminUsuarios.php">Mantenimiento Usuarios</a>
+                              <a class="dropdown-item" href="adminUsuarios.php">Mantenimiento Usuarios</a>
 
-                          <a class="dropdown-item" href="adminTipos.php">Mantenimiento Tipos de Servicios</a>
+                              <a class="dropdown-item" href="adminTipos.php">Mantenimiento Tipos de Servicios</a>
 
-                          <a class="dropdown-item" href="adminCategorias.php">Mantenimiento Categorías</a>
+                              <a class="dropdown-item" href="adminCategorias.php">Mantenimiento Categorías</a>
 
-                          <a class="dropdown-item" href="adminServicios.php">Mantenimiento Servicios</a>
+                              <a class="dropdown-item" href="adminServicios.php">Mantenimiento Servicios</a>
 
-                          <a class="dropdown-item" href="#">Mantenimiento Citas</a>
-
-                      </div>
-                  </li>
+                          </div>
+                      </li>
                   <?php
                     }
                     ?>

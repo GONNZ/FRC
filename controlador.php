@@ -4,6 +4,9 @@ if (isset($_POST['accion'])) {
     include './Clases/ClaseCategoria.php';
     include './Clases/ClaseTipos.php';
     include './Clases/ClaseServicio.php';
+    include './Clases/ClaseCarrito.php';
+
+    $Carrito = new ClaseCarrito();
     $Servicio = new ClaseServicio();
     $Tipo = new ClaseTipos();
     $Categoria = new ClaseCategoria();
@@ -311,12 +314,40 @@ if (isset($_POST['accion'])) {
         case 'FiltroServicios':
 
             $id = $_POST['id'];
-
             $respuesta = $Servicio->ListarServiciosCli($id);
             echo json_encode($respuesta);
 
             break;
             /* #endregion  */
+
+            /* #region Carrito */
+
+        case 'añadirCarrito':
+
+            $id = $_POST['id'];
+            $fecha = $_POST['fecha'];
+            $respuesta = $Carrito->Añadir($id, $fecha);
+            echo json_encode($respuesta);
+
+            break;
+        case 'getCarrito':
+
+            session_start();
+            $carrito = $_SESSION['carrito'];
+            echo json_encode($carrito);
+
+            break;
+
+        case 'borradeCarrito':
+
+            $id = $_POST['id'];
+            $Carrito->BorrarCarrito($id);
+            echo json_encode('case');
+
+            break;
+            /* #endregion Carrito */
+
+
 
         default:
             echo 'No se hará nada';
