@@ -50,7 +50,7 @@ class ClaseCitas
         if ($id == '') {
 
             include('C:\wamp64\www\FRC\BD\conexion.php');
-            $query = "SELECT * FROM tbcitas ORDER BY idCita";
+            $query = "SELECT * FROM tbcitas WHERE idEstado = '1' ORDER BY fechaCita";
 
             $resultado = $mysql->query($query);
 
@@ -69,7 +69,7 @@ class ClaseCitas
 
             include('C:\wamp64\www\FRC\BD\conexion.php');
             $retorno = array();
-            $query = "SELECT * FROM tbcitas WHERE idUsuario = '" . $id . "' AND idEstado = '1'";
+            $query = "SELECT * FROM tbcitas WHERE idUsuario = '" . $id . "' AND idEstado = '1' ORDER BY fechaCita";
 
             $resultado = $mysql->query($query);
             if ($resultado->num_rows > 0) {
@@ -102,6 +102,30 @@ class ClaseCitas
         } else {
             $retorno = false;
         }
+        return $retorno;
+    }
+
+    #Select a clientes con Cita para combo.
+
+    function UsuariosCitas()
+    {
+        include('C:\wamp64\www\FRC\BD\conexion.php');
+        $retorno = array();
+        $query = "SELECT idUsuario FROM tbcitas WHERE idEstado = 1 group BY idUsuario";
+
+        $resultado = $mysql->query($query);
+        if ($resultado->num_rows > 0) {
+
+            $json = array();
+            while ($fila = mysqli_fetch_array($resultado)) {
+                $json[] = $fila;
+            }
+            $retorno["valido"] = true;
+            $retorno["citas"] = $json;
+        } else {
+            $retorno["valido"] = false;
+        }
+
         return $retorno;
     }
 }

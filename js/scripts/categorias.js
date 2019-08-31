@@ -111,6 +111,7 @@ $(function () {
                             }
                         );
                     }
+                    var edit = false;
                 }
                 Listar();
                 $('#frmCategoria').trigger('reset');

@@ -413,6 +413,39 @@ if (isset($_POST['accion'])) {
             echo json_encode($respuesta);
 
             break;
+
+        case 'admCitas':
+
+            $id = $_POST['id'];
+
+            if ($id == '*') {
+                $respuesta = $Citas->ListarCitas('');
+            } else {
+                $respuesta = $Citas->ListarCitas($id);
+            }
+            echo json_encode($respuesta);
+            break;
+
+        case 'CitasADM':
+
+            $respuesta = $Citas->UsuariosCitas();
+            if (empty($respuesta['citas'])) {
+                $respuesta['valido'] = false;
+            } else {
+                $respuesta['valido'] = true;
+            }
+            echo json_encode($respuesta);
+
+            break;
+        case 'facCita':
+
+            $id = $_POST['id'];
+            $respuesta = $Citas->ActualizaEstadoCita($id, 3);
+            echo json_encode($respuesta);
+
+            break;
+
+            break;
             /* #endregion Citas */
 
 
